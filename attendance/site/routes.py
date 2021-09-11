@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from attendance.forms import CreateEvent, CheckIn
 from attendance.models import db, Event, User, Participant
+import datetime
 
 site = Blueprint('site', __name__, template_folder='site_templates')
 
@@ -10,7 +11,12 @@ site = Blueprint('site', __name__, template_folder='site_templates')
 def home():
     # revise: return only future/current events here
     events = Event.query.all()
-    return render_template('index.html', events = events)
+    live_events = []
+    for event in events:
+        event_end = event.day_time + datetime.timedelta(seconds=event.duration)
+        if datetime.now() < event_end:
+            live_events.append(event)
+    return render_template('index.html', events = live_events)
 
 @site.route('/newevent')
 @login_required
@@ -62,7 +68,16 @@ def checkin():
 @site.route('/profile')
 @login_required
 def profile():
-    user_events = Event.query.filter_by(user_id=current_user.id).all()
-    return render_template('profile.html', user_events=user_events)
+    """Display all events hosted by current user"""
+    host_events = Event.query.filter_by(user_id=current_user.id).all()
+    return render_template('profile.html', host_events=host_events)
+
+@site.route('/event')
+@login_required
+def event():
+    """Display all participants checked into an event"""
+    event_id = request.args.get('id', None)
+    participants = Participant.query.filter_by(event_id=event_id).all()
+    return render_template('event.html', participants=participants)
 
             

@@ -15,7 +15,7 @@ class CheckIn(FlaskForm):
     last_name = TextAreaField('Last Name', validators=[DataRequired()])
     submit_button = SubmitField()
 
-class UserLogin(FlaskForm):
+class HostLogin(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit_button = SubmitField()
