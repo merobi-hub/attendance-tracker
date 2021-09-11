@@ -2,7 +2,15 @@
 
 {% block content %}
 
-{% for user_event in user_events %}
+{% for host_event in host_events %}
+
+<div class="row">
+    <div class="card">
+        <div>
+            <a href="{{ url_for('site.event', id=host_event.id) }}">View Attendees</a>
+        </div>
+    </div>
+</div>
 
 {% endfor %}
 

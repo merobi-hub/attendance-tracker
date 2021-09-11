@@ -68,14 +68,14 @@ def checkin():
 @site.route('/profile')
 @login_required
 def profile():
-    """Display all events hosted by current user"""
+    """Displays all events hosted by the current user"""
     host_events = Event.query.filter_by(user_id=current_user.id).all()
     return render_template('profile.html', host_events=host_events)
 
 @site.route('/event')
 @login_required
 def event():
-    """Display all participants checked into an event"""
+    """Displays all participants checked into an event"""
     event_id = request.args.get('id', None)
     participants = Participant.query.filter_by(event_id=event_id).all()
     return render_template('event.html', participants=participants)

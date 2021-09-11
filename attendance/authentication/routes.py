@@ -2,14 +2,14 @@ from flask import Blueprint, request, render_template, flash, redirect
 from flask.helpers import url_for
 from werkzeug.security import check_password_hash
 from flask_login import login_user, logout_user, login_required
-from attendance.forms import UserLogin
+from attendance.forms import HostLogin
 from attendance.models import User, db, check_password_hash
 
 auth = Blueprint('auth', __name__, template_folder='auth_templates') 
 
 @auth.route('/signup', methods = ['GET', 'POST'])
 def signup():
-    form = UserLogin()
+    form = HostLogin()
     try:
         if request.method == 'POST' and form.validate_on_submit():
             email = form.email.data 
@@ -29,7 +29,7 @@ def signup():
 
 @auth.route('/login', methods = ['GET', 'POST'])
 def login():
-    form = UserLogin() 
+    form = HostLogin() 
     try:
         if request.method == 'POST' and form.validate_on_submit():
             email = form.email.data
