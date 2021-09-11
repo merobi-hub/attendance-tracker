@@ -4,4 +4,16 @@
 <div>
     <h1>site home</h1>
 </div>
+{% for event in events %}
+
+<!-- display only events to be held in future or currently ongoing -->
+
+<div class="row">
+    <div class="card">
+        <div>
+            <a href="{{ url_for('site.checkin', event_id=event.id) }}">Check in</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
 {% endblock content %}

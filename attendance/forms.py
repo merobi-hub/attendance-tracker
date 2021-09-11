@@ -1,12 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, DateField, TextAreaField, PasswordField
+from wtforms import StringField, SubmitField, DateTimeField, TextAreaField, PasswordField
 from wtforms.validators import DataRequired, Email
 
 class CreateEvent(FlaskForm):
     title = TextAreaField('Title', validators=[DataRequired()])
     host = TextAreaField('Host', validators=[DataRequired()])
-    day = DateField('Day', format='%m/%d/%Y', validators=[DataRequired()])
-    duration = TextAreaField('Duration', validators=[DataRequired()])
+    day_time = DateTimeField('Day (yyyy-mm-dd hh:mm:ss)', format='%Y-%m-%d %H:%M:%S', validators=[DataRequired()])
+    duration = TextAreaField('Duration (minutes)', validators=[DataRequired()])
     other = TextAreaField('Other')
     submit_button = SubmitField()
 

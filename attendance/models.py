@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from datetime import date, time 
+# from datetime import date, time 
 import uuid 
 from werkzeug.security import generate_password_hash
 from flask_login import UserMixin, LoginManager 
@@ -12,7 +12,7 @@ def load_user(user_id):
     return User.query.get(user_id) 
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.String, primary_key = True)
+    id = db.Column(db.String, primary_key=True)
     email = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.String, nullable=False, default='')
 
@@ -34,8 +34,8 @@ class User(db.Model, UserMixin):
 class Event(db.Model):
     id = db.Column(db.String, primary_key=True)
     title = db.Column(db.String(300))
-    day = db.Column(db.String(25))
-    duration = db.Column(db.String(3))
+    day_time = db.Column(db.String(20))
+    duration = db.Column(db.String(5))
     host = db.Column(db.String(150))
     other = db.Column(db.String(200))
     user_id = db.Column(db.String, db.ForeignKey('user.id'), nullable=False)
@@ -43,7 +43,7 @@ class Event(db.Model):
     def __init__(
         self,
         title,
-        day,
+        day_time,
         duration,
         host,
         other,
@@ -52,7 +52,7 @@ class Event(db.Model):
         ):
         self.id = self.set_id()
         self.title = title 
-        self.day = day 
+        self.day_time = day_time 
         self.duration = duration 
         self.host = host 
         self.other = other
@@ -65,16 +65,19 @@ class Event(db.Model):
         return str(uuid.uuid4())
 
 class Participant(db.Model):
+    id = db.Column(db.String, primary_key=True)
     first_name = db.Column(db.String(150))
     last_name = db.Column(db.String(150))
     event_id = db.Column(db.String, db.ForeignKey('event.id'), nullable=False)
 
-    def __init__(self, first_name, last_name, event_id): 
+    def __init__(self, first_name, last_name, event_id, id=''): 
         self.first_name = first_name 
         self.last_name = last_name 
-        self.event_id = event_id 
+        self.event_id = event_id
+        self.id = self.set_id() 
 
     def __repr__(self):
         return f'Thank you for checking in.'
 
-    
+    def set_id(self):
+        return str(uuid.uuid4())
