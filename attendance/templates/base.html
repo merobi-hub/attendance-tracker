@@ -20,12 +20,41 @@
 </head>
 <body>
     <div class="container">
+        {% with messages = get_flashed_messages(with_categories = true) %}
+            {% if messages %}
+                {% for cat,msg in messages %}
+                    {% if cat == 'user-created' %}
+                        <div class="alert alert-success">
+                            {{ msg }}
+                            <button type="button" class="close" data-dismiss = "alert">&times;</button>
+                        </div>
+                    {% elif cat == 'auth-success' %}
+                        <div class="alert alert-success">
+                            {{ msg }}
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    {% elif cat == 'auth-failed' %}
+                        <div class="alert alert-warning">
+                            {{ msg }}
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <div class="container">
         <nav class="top nav">
             <div class="row">
                 <div class="col-sm" id="nav-col">
-                    <a href="{{ }}" id="nav-link">Host Log in</a>
+                    <a href="{{ url_for('auth.login') }}" id="nav-link">Host Log In</a>
                 </div>
-
+                <div class="col-sm" id="nav-col">
+                    <a href="{{ url_for('auth.signup') }}" id="nav-link">Host Sign Up</a>
+                </div>
+                <div class="col-sm" id="nav-col">
+                    <a href="{{ url_for('site.profile') }}" id="nav-link">Host Profile</a>
+                </div>
                 
             </div>
         </nav>

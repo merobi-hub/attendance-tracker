@@ -2,10 +2,11 @@
 
 {% block content %}
 
-{% include 'forms.html' %}
+
 
 <div>
     <form method="POST">
+        {{ form.hidden_tag() }}
         <div class="form-group">
             <fieldset>
                 {{ form.email.label }}

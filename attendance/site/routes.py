@@ -1,5 +1,5 @@
-from attendance.forms import CreateEvent
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect
+from flask.helpers import url_for
 from flask_login import login_required, current_user
 from attendance.forms import CreateEvent, CheckIn
 from attendance.models import db, Event, User, Participant
@@ -18,29 +18,31 @@ def home():
             live_events.append(event)
     return render_template('index.html', events = live_events)
 
-@site.route('/newevent')
+@site.route('/newevent', methods = ['GET', 'POST'])
 @login_required
 def newevent():
     form = CreateEvent()
+    # print(current_user.id)
     try:
         if request.method == 'POST' and form.validate_on_submit():
-            # must add precise day/time of event w/ form and db
             title = form.title.data
             host = form.host.data
             day_time = form.day_time.data
             duration = form.duration.data
             other = form.other.data 
             user_id = current_user.id
+            print(title, host, day_time, duration, other, user_id)
 
             event = Event(title, host, day_time, duration, other, user_id)
             db.session.add(event)
             db.session.commit()
 
             flash(f'Your new event was created successfully', 'user-created')
-
             return redirect(url_for('site.home'))
     except:
-        raise Exception('An error occurred. Please try again.')
+    # else:
+        flash(f'An error occurred. Please try again.')
+        return redirect(url_for('site.home'))
 
     return render_template('newevent.html', form=form)
 
