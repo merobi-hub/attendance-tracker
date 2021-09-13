@@ -34,27 +34,27 @@ class User(db.Model, UserMixin):
 class Event(db.Model, UserMixin):
     id = db.Column(db.String, primary_key=True)
     title = db.Column(db.String(300))
+    host = db.Column(db.String(150))
     day_time = db.Column(db.String(20))
     duration = db.Column(db.String(5))
-    host = db.Column(db.String(150))
     other = db.Column(db.String(200), nullable=True)
     user_id = db.Column(db.String, db.ForeignKey('user.id'), nullable=False)
 
     def __init__(
         self,
         title,
+        host,
         day_time,
         duration,
-        host,
         other,
         user_id,
         id = ''
         ):
         self.id = self.set_id()
         self.title = title 
+        self.host = host 
         self.day_time = day_time 
         self.duration = duration 
-        self.host = host 
         self.other = other
         self.user_id = user_id  
 
