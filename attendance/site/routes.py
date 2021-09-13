@@ -9,14 +9,10 @@ site = Blueprint('site', __name__, template_folder='site_templates')
 
 @site.route('/') 
 def home():
-    # revise: return only future/current events here
     events = Event.query.all()
     live_events = []
     for event in events:
-        # wrong input or problem with form: should be event.duration not host
         td = datetime.timedelta(seconds=int(event.duration))
-        # event_end = event.day_time + datetime.timedelta(seconds=event.duration)
-        # should be event.day_time not duration here:
         t = datetime.datetime.strptime(event.day_time, "%Y-%m-%d %H:%M:%S")
         event_end = t + td
         if datetime.datetime.now() < event_end:
@@ -26,6 +22,7 @@ def home():
 @site.route('/newevent', methods = ['GET', 'POST'])
 @login_required
 def newevent():
+    """Displays CreateEvent form and processes new event"""
     form = CreateEvent()
     # print(current_user.id)
     try:
@@ -45,7 +42,6 @@ def newevent():
             flash(f'Your new event was created successfully', 'user-created')
             return redirect(url_for('site.home'))
     except:
-    # else:
         flash(f'An error occurred. Please try again.')
         return redirect(url_for('site.home'))
 
@@ -53,6 +49,7 @@ def newevent():
 
 @site.route('/checkin', methods = ['GET', 'POST']) 
 def checkin():
+    """Displays checkin form and checks in participant"""
     form = CheckIn()
     event_id = request.args.get('event_id', None)
     print('event_id: ', event_id)
@@ -85,7 +82,8 @@ def profile():
 def event():
     """Displays all participants checked into an event"""
     event_id = request.args.get('id', None)
+    event = Event.query.filter_by(id=event_id).first()
     participants = Participant.query.filter_by(event_id=event_id).all()
-    return render_template('event.html', participants=participants)
+    return render_template('event.html', participants=participants, event=event)
 
             

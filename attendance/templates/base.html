@@ -43,26 +43,35 @@
             {% endif %}
         {% endwith %}
     </div>
-    <div class="container">
-        <nav class="top nav">
-            <div class="row">
-                <div class="col-sm" id="nav-col">
-                    <a href="{{ url_for('site.home') }}" id="nav-link">Home</a>
+    <div class="container" id="nav-container">
+        <div class="nav-div">
+            <nav class="top nav">
+                <div class="row" id="nav-links">
+                    {% if current_user.is_authenticated %}
+                    <div class="col-sm" id="nav-col">
+                        <a href="{{ url_for('site.home') }}" id="nav-link">Home</a>
+                    </div>
+                    <div class="col-sm" id="nav-col">
+                        <a href="{{ url_for('site.profile') }}" id="nav-link">Profile</a>
+                    </div>
+                    <div class="col-sm" id="nav-col">
+                        <a href="{{ url_for('auth.logout') }}" id="nav-link">Log Out</a>
+                    </div>  
+                    {% else %}
+                    <div class="col-sm" id="nav-col">
+                        <a href="{{ url_for('site.home') }}" id="nav-link">Home</a>
+                    </div>
+                    <div class="col-sm" id="nav-col">
+                        <a href="{{ url_for('auth.login') }}" id="nav-link">Host Log In</a>
+                    </div>
+                    <div class="col-sm" id="nav-col">
+                        <a href="{{ url_for('auth.signup') }}" id="nav-link">Host Sign Up</a>
+                    </div>        
                 </div>
-                <div class="col-sm" id="nav-col">
-                    <a href="{{ url_for('auth.login') }}" id="nav-link">Host Log In</a>
-                </div>
-                <div class="col-sm" id="nav-col">
-                    <a href="{{ url_for('auth.signup') }}" id="nav-link">Host Sign Up</a>
-                </div>
-                <div class="col-sm" id="nav-col">
-                    <a href="{{ url_for('site.profile') }}" id="nav-link">Host Profile</a>
-                </div>
-                
-            </div>
-        </nav>
+            </nav>
+        </div>
     </div>
-
+    {% endif %}
     {% block content %}
     {% endblock content %}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
