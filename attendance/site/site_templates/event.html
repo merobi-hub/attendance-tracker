@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div>
-    {{event.title}}
-    {{event.day_time}}
+<div class="container" id="event-container">
+    <div class="row">
+        <div class="col-md-4">
+            {{event.title}} {{event.day}}
+        </div>
+    </div>
+    <div id="participant-list">
+        {% for participant in participants %}
+        <div class="row">
+            <div class="col-md-4">
+                {{participant.first_name}} {{participant.last_name}}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
-
-{% for participant in participants %}
-
-<div>
-    {{participant.first_name}} {{participant.last_name}}
-</div>
-
-{% endfor %}
-
 {% endblock content %}

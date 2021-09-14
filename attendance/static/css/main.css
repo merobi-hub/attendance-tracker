@@ -1,6 +1,6 @@
 body {
     color: black;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
 #nav-container {
@@ -14,6 +14,7 @@ body {
 
 #nav-col {
     width: 200px;
+    text-align: center
 }
 
 .nav-div {
@@ -26,7 +27,7 @@ body {
     width: 100%
 }
 
-.new-event-button {
+#new-event-button {
     width: 50%;
     margin: 0 auto;
     margin-top: 10vh;
@@ -42,3 +43,36 @@ body {
     margin-left: 25%;
 } 
 
+#event-container {
+    margin-top: 10vh
+}
+
+#participant-list {
+    margin-top: 10vh
+}
+
+.form-container {
+    margin-top: 10vh;
+    width: 100%
+}
+
+.checkin-container {
+    margin-top: 10vh;
+    width: 100%
+}
+
+.form-group {
+    width: 50%;
+    margin: 0 auto
+}
+
+.events-container {
+    margin-top: 10vh;
+    width: 100%
+}
+
+#events-row {
+    text-align: center;
+    width: 50%;
+    margin: 0 auto
+}

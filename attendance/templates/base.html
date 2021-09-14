@@ -50,25 +50,25 @@
                     {% if current_user.is_authenticated %}
                     
                         <div class="col-md-4" id="nav-col">
-                            <a href="{{ url_for('site.home') }}" id="nav-link">Home</a>
+                            <a href="{{ url_for('site.home') }}" id="nav-link">HOME</a>
                         </div>
                         <div class="col-md-4" id="nav-col">
-                            <a href="{{ url_for('site.profile') }}" id="nav-link">Profile</a>
+                            <a href="{{ url_for('site.profile') }}" id="nav-link">PROFILE</a>
                         </div>
                         <div class="col-md-4" id="nav-col">
-                            <a href="{{ url_for('auth.logout') }}" id="nav-link">Log Out</a>
+                            <a href="{{ url_for('auth.logout') }}" id="nav-link">LOG OUT</a>
                         </div>
                       
                     {% else %}
                     
                         <div class="col-md-4" id="nav-col">
-                            <a href="{{ url_for('site.home') }}" id="nav-link">Home</a>
+                            <a href="{{ url_for('site.home') }}" id="nav-link">HOME</a>
                         </div>
                         <div class="col-md-4" id="nav-col">
-                            <a href="{{ url_for('auth.login') }}" id="nav-link">Host Log In</a>
+                            <a href="{{ url_for('auth.login') }}" id="nav-link">HOST LOG IN</a>
                         </div>
                         <div class="col-md-4" id="nav-col">
-                            <a href="{{ url_for('auth.signup') }}" id="nav-link">Host Sign Up</a>
+                            <a href="{{ url_for('auth.signup') }}" id="nav-link">HOST SIGN UP</a>
                         </div>
                             
                 </div>
