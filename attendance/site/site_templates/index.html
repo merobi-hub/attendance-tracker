@@ -4,7 +4,7 @@
 
 <div class="container" id="button-div">
     <div class="new-event-button">
-        <a href="{{ url_for('site.newevent') }}" class="btn btn-primary"><h3>Create an Event</h3></a>
+        <a href="{{ url_for('site.newevent') }}" class="btn btn-primary" id="create-btn"><h3>Create an Event</h3></a>
     </div>
 </div>
 {% for event in events %}

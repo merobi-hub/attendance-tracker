@@ -35,7 +35,8 @@ class Event(db.Model, UserMixin):
     id = db.Column(db.String, primary_key=True)
     title = db.Column(db.String(300))
     host = db.Column(db.String(150))
-    day_time = db.Column(db.String(20))
+    day = db.Column(db.String(10))
+    time = db.Column(db.String(8))
     duration = db.Column(db.String(5))
     other = db.Column(db.String(200), nullable=True)
     user_id = db.Column(db.String, db.ForeignKey('user.id'), nullable=False)
@@ -44,7 +45,8 @@ class Event(db.Model, UserMixin):
         self,
         title,
         host,
-        day_time,
+        day,
+        time,
         duration,
         other,
         user_id,
@@ -53,7 +55,8 @@ class Event(db.Model, UserMixin):
         self.id = self.set_id()
         self.title = title 
         self.host = host 
-        self.day_time = day_time 
+        self.day = day
+        self.time = time 
         self.duration = duration 
         self.other = other
         self.user_id = user_id  

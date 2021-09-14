@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect
 from flask.helpers import url_for
 from flask_login import login_required, current_user
 from attendance.forms import CreateEvent, CheckIn
-from attendance.models import db, Event, User, Participant
+from attendance.models import db, Event, Participant
 import datetime, timedelta
 
 site = Blueprint('site', __name__, template_folder='site_templates')
@@ -12,9 +12,10 @@ def home():
     events = Event.query.all()
     live_events = []
     for event in events:
-        td = datetime.timedelta(seconds=int(event.duration))
-        t = datetime.datetime.strptime(event.day_time, "%Y-%m-%d %H:%M:%S")
-        event_end = t + td
+        dt_str = event.day + ' ' + event.time
+        dur = datetime.timedelta(seconds=int(event.duration))
+        dt = datetime.datetime.strptime(dt_str, "%Y-%m-%d %H:%M:%S")
+        event_end = dt + dur
         if datetime.datetime.now() < event_end:
             live_events.append(event)
     return render_template('index.html', events = live_events)
@@ -29,13 +30,14 @@ def newevent():
         if request.method == 'POST' and form.validate_on_submit():
             title = form.title.data
             host = form.host.data
-            day_time = form.day_time.data
+            day = form.day.data
+            time = form.time.data
             duration = form.duration.data
             other = form.other.data 
             user_id = current_user.id
-            print(title, host, day_time, duration, other, user_id)
+            print(title, host, day, time, duration, other, user_id)
 
-            event = Event(title, host, day_time, duration, other, user_id)
+            event = Event(title, host, day, time, duration, other, user_id)
             db.session.add(event)
             db.session.commit()
 

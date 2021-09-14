@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="Description" content="Enter your description here"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="../static/css/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -48,25 +48,29 @@
             <nav class="top nav">
                 <div class="row" id="nav-links">
                     {% if current_user.is_authenticated %}
-                    <div class="col-sm" id="nav-col">
-                        <a href="{{ url_for('site.home') }}" id="nav-link">Home</a>
-                    </div>
-                    <div class="col-sm" id="nav-col">
-                        <a href="{{ url_for('site.profile') }}" id="nav-link">Profile</a>
-                    </div>
-                    <div class="col-sm" id="nav-col">
-                        <a href="{{ url_for('auth.logout') }}" id="nav-link">Log Out</a>
-                    </div>  
+                    
+                        <div class="col-md-4" id="nav-col">
+                            <a href="{{ url_for('site.home') }}" id="nav-link">Home</a>
+                        </div>
+                        <div class="col-md-4" id="nav-col">
+                            <a href="{{ url_for('site.profile') }}" id="nav-link">Profile</a>
+                        </div>
+                        <div class="col-md-4" id="nav-col">
+                            <a href="{{ url_for('auth.logout') }}" id="nav-link">Log Out</a>
+                        </div>
+                      
                     {% else %}
-                    <div class="col-sm" id="nav-col">
-                        <a href="{{ url_for('site.home') }}" id="nav-link">Home</a>
-                    </div>
-                    <div class="col-sm" id="nav-col">
-                        <a href="{{ url_for('auth.login') }}" id="nav-link">Host Log In</a>
-                    </div>
-                    <div class="col-sm" id="nav-col">
-                        <a href="{{ url_for('auth.signup') }}" id="nav-link">Host Sign Up</a>
-                    </div>        
+                    
+                        <div class="col-md-4" id="nav-col">
+                            <a href="{{ url_for('site.home') }}" id="nav-link">Home</a>
+                        </div>
+                        <div class="col-md-4" id="nav-col">
+                            <a href="{{ url_for('auth.login') }}" id="nav-link">Host Log In</a>
+                        </div>
+                        <div class="col-md-4" id="nav-col">
+                            <a href="{{ url_for('auth.signup') }}" id="nav-link">Host Sign Up</a>
+                        </div>
+                            
                 </div>
             </nav>
         </div>

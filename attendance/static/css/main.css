@@ -1,14 +1,25 @@
 body {
     color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #nav-container {
     width: 100%;
 }
 
+#nav-links {
+    /* width: max-content; */
+    margin: auto;
+}
+
+#nav-col {
+    width: 200px;
+}
+
 .nav-div {
-    width: 50%;
+    width: 75%;
     margin: 0 auto;
+    margin-top: 10vh;
 }
 
 #button-div {
@@ -18,4 +29,16 @@ body {
 .new-event-button {
     width: 50%;
     margin: 0 auto;
+    margin-top: 10vh;
 }
+
+#nav-link {
+    text-decoration: none;
+    color:black;
+}
+
+#create-btn {
+    width: 50%;
+    margin-left: 25%;
+} 
+

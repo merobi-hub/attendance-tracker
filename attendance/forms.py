@@ -6,7 +6,8 @@ from flask_login import UserMixin
 class CreateEvent(FlaskForm, UserMixin):
     title = TextAreaField('Title', validators=[DataRequired()])
     host = TextAreaField('Host', validators=[DataRequired()])
-    day_time = TextAreaField('Day (yyyy-mm-dd hh:mm:ss)', validators=[DataRequired()])
+    day = TextAreaField('Day (yyyy-mm-dd)', validators=[DataRequired()])
+    time = TextAreaField('Time (use 24-hour clock in format hh:mm:ss)', validators=[DataRequired()])
     duration = TextAreaField('Duration (seconds)', validators=[DataRequired()])
     other = TextAreaField('Other')
     submit_button = SubmitField()
