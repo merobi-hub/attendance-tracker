@@ -9,15 +9,16 @@
         </div>
     </div>
 </div>
-<div class="events-container">
+<div class="container" id="events-container">
     {% for event in events %}
     <div class="row" id="events-row">
         <div class="col-md-6" id="events-col">
-            <div class="card">
+            <div class="card" id="profile-event-card">
                 <div class="card-body">
                     <h5 class="card-title">{{event.title}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{event.host}}</h6>
                     <h6 class="card-text">{{event.day}}</h6>
+                    <h6 class="card-text">{{event.time}}</h6>
                     <h6 class="card-text">{{event.other}}</h6>
                     <a href="{{ url_for('site.checkin', event_id=event.id) }}" class="card-link">Check in</a>
                 </div>

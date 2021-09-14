@@ -9,23 +9,32 @@ site = Blueprint('site', __name__, template_folder='site_templates')
 
 @site.route('/') 
 def home():
+    """Displays current and upcoming events"""
     events = Event.query.all()
     live_events = []
     for event in events:
+        # Merge day/time form inputs
         dt_str = event.day + ' ' + event.time
-        dur = datetime.timedelta(seconds=int(event.duration))
+        # Convert day/time str to datetime object
         dt = datetime.datetime.strptime(dt_str, "%Y-%m-%d %H:%M:%S")
+        # Convert duration from mins to seconds
+        dur = int(event.duration) * 60
+        # Convert dur from int to datetime object
+        dur = datetime.timedelta(seconds=int(dur))
+        # Calculate event end time
         event_end = dt + dur
-        if datetime.datetime.now() < event_end:
+        # Compare current time to event end time
+        now = str(datetime.datetime.now())[:-7]
+        now = datetime.datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
+        if event_end >= now:
             live_events.append(event)
     return render_template('index.html', events = live_events)
 
 @site.route('/newevent', methods = ['GET', 'POST'])
 @login_required
 def newevent():
-    """Displays CreateEvent form and processes new event"""
+    """Displays CreateEvent form and processes new event submission"""
     form = CreateEvent()
-    # print(current_user.id)
     try:
         if request.method == 'POST' and form.validate_on_submit():
             title = form.title.data
@@ -35,7 +44,6 @@ def newevent():
             duration = form.duration.data
             other = form.other.data 
             user_id = current_user.id
-            print(title, host, day, time, duration, other, user_id)
 
             event = Event(title, host, day, time, duration, other, user_id)
             db.session.add(event)
@@ -51,26 +59,36 @@ def newevent():
 
 @site.route('/checkin', methods = ['GET', 'POST']) 
 def checkin():
-    """Displays checkin form and checks in participant"""
+    """Displays checkin form and checks in participant if event has begun"""
     form = CheckIn()
     event_id = request.args.get('event_id', None)
     print('event_id: ', event_id)
-    try:
-        if request.method == 'POST' and form.validate_on_submit(): 
-            first_name = form.first_name.data 
-            last_name = form.last_name.data
+    event = Event.query.filter_by(id=event_id).first()
+    # Merge day/time form inputs
+    dt_str = event.day + ' ' + event.time
+    # Convert day/time str to datetime object
+    dt = datetime.datetime.strptime(dt_str, "%Y-%m-%d %H:%M:%S")
+    start_time = dt
+    if datetime.datetime.now() < start_time:
+        flash(f'Your check-in attempt was unsuccessful. Please wait for the event to start.', 'auth-failed')
+        return redirect(url_for('site.home'))
+    else:
+        try:
+            if request.method == 'POST' and form.validate_on_submit(): 
+                first_name = form.first_name.data 
+                last_name = form.last_name.data
 
-            checkin = Participant(first_name, last_name, event_id)
-            db.session.add(checkin)
-            db.session.commit() 
+                checkin = Participant(first_name, last_name, event_id)
+                db.session.add(checkin)
+                db.session.commit() 
 
-            flash(f'You have been checked in', 'user-created')
+                flash(f'You have been checked in', 'user-created')
 
-            return redirect(url_for('site.home')) 
-    except: 
-        raise Exception('An error occurred. Please try again.') 
+                return redirect(url_for('site.home')) 
+        except: 
+            raise Exception('An error occurred. Please try again.') 
 
-    return render_template('checkin.html', form=form)
+        return render_template('checkin.html', form=form)
 
 @site.route('/profile')
 @login_required
@@ -78,6 +96,16 @@ def profile():
     """Displays all events hosted by the current user"""
     host_events = Event.query.filter_by(user_id=current_user.id).all()
     return render_template('profile.html', host_events=host_events)
+
+@site.route('/deleteevent', methods = ['GET', 'POST'])
+@login_required
+def deleteevent():
+    """Permits host to delete an event"""
+    id = request.args.get('id', None)
+    Event.query.filter_by(id=id).delete()
+    db.session.commit()
+    flash(f'The event has been deleted.', 'user-created')
+    return redirect(url_for('site.profile'))
 
 @site.route('/event')
 @login_required

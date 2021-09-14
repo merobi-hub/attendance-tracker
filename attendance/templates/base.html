@@ -43,6 +43,7 @@
             {% endif %}
         {% endwith %}
     </div>
+    
     <div class="container" id="nav-container">
         <div class="nav-div">
             <nav class="top nav">
@@ -70,12 +71,20 @@
                         <div class="col-md-4" id="nav-col">
                             <a href="{{ url_for('auth.signup') }}" id="nav-link">HOST SIGN UP</a>
                         </div>
-                            
+                    {% endif %}    
                 </div>
             </nav>
         </div>
+       
     </div>
-    {% endif %}
+    
+    <div class="container" id="home-title">
+        <div class="row" id="home-title-row">
+            <div class="col-md-12" id="home-title-col">
+                <h1>Attendance</h1>
+            </div>
+        </div>
+    </div>
     {% block content %}
     {% endblock content %}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

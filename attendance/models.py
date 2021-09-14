@@ -62,7 +62,8 @@ class Event(db.Model, UserMixin):
         self.user_id = user_id  
 
     def __repr__(self):
-        return f'{self.title} has been created.'
+        # return f'{self.title} has been created.'
+        return f'{self.title}\n{self.host}\n{self.day}\n{self.time}\n{self.duration}\n{self.other}'
 
     def set_id(self):
         return str(uuid.uuid4())

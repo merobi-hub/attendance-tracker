@@ -8,7 +8,7 @@ class CreateEvent(FlaskForm, UserMixin):
     host = TextAreaField('Host', validators=[DataRequired()])
     day = TextAreaField('Day (yyyy-mm-dd)', validators=[DataRequired()])
     time = TextAreaField('Time (use 24-hour clock in format hh:mm:ss)', validators=[DataRequired()])
-    duration = TextAreaField('Duration (seconds)', validators=[DataRequired()])
+    duration = TextAreaField('Duration (minutes)', validators=[DataRequired()])
     other = TextAreaField('Other')
     submit_button = SubmitField()
 
