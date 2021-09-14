@@ -3,6 +3,8 @@ body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
+/* Nav */
+
 #nav-container {
     width: 100%;
 }
@@ -23,29 +25,40 @@ body {
     margin-top: 10vh;
 }
 
-#button-div {
-    width: 100%
-}
-
-#new-event-button {
-    width: 50%;
-    margin: 0 auto;
-    margin-top: 10vh;
-}
-
 #nav-link {
     text-decoration: none;
     color:black;
 }
 
-#create-btn {
+/* Event Button */
+
+#button-div {
+    margin-top: 10vh;
+    width: 100%;
+}
+
+#button-col {
+    text-align: center;
+}
+
+#button-row {
     width: 50%;
-    margin-left: 25%;
+    margin: 0 auto
+}
+
+#create-btn {
+    /* width: 50%;
+    margin-left: 25%; */
+    /* width: 50%; */
+    /* margin: 0 auto;
+    margin-top: 10vh;  */
 } 
 
 #event-container {
     margin-top: 10vh
 }
+
+/* event.html */
 
 #participant-list {
     margin-top: 10vh
@@ -66,13 +79,40 @@ body {
     margin: 0 auto
 }
 
+/* index.html */
+
 .events-container {
     margin-top: 10vh;
     width: 100%
 }
 
 #events-row {
-    text-align: center;
+    /* text-align: center; */
     width: 50%;
     margin: 0 auto
+}
+
+#events-col {
+    margin: 0 auto;
+}
+
+/* Profile */
+
+#profile-event-card {
+    margin-top: 10vh;
+}
+
+#profile-container {
+    width: 100%
+}
+
+#profile-row {
+    width: 50%;
+    margin: 0 auto;
+    
+}
+
+#profile-col {
+    margin: 0 auto;
+    /* text-align: center */
 }

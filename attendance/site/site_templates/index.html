@@ -3,8 +3,8 @@
 {% block content %}
 
 <div class="container" id="button-div">
-    <div class="row">
-        <div class="col-md-12" id="new-event-button">
+    <div class="row" id="button-row">
+        <div class="col-md-12" id="button-col">
             <a href="{{ url_for('site.newevent') }}" class="btn btn-primary" id="create-btn"><h4>Create an Event</h4></a>
         </div>
     </div>
@@ -12,13 +12,15 @@
 <div class="events-container">
     {% for event in events %}
     <div class="row" id="events-row">
-        <div class="card">
-            <div class="card-body">
-                {{event.title}}
-                {{event.host}}
-                {{event.day_time}}
-                {{event.other}}
-                <a href="{{ url_for('site.checkin', event_id=event.id) }}">Check in</a>
+        <div class="col-md-6" id="events-col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{event.title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{event.host}}</h6>
+                    <h6 class="card-text">{{event.day}}</h6>
+                    <h6 class="card-text">{{event.other}}</h6>
+                    <a href="{{ url_for('site.checkin', event_id=event.id) }}" class="card-link">Check in</a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,19 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-{% for host_event in host_events %}
-
-<div class="row">
-    <div class="card">
-        <div>
-            {{host_event.title}}
-            {{host_event.day_time}}
-            <a href="{{ url_for('site.event', id=host_event.id) }}">View Attendees</a>
+<div class="container" id="profile-container">
+    {% for host_event in host_events %}
+        <div class="row" id="profile-row">
+            <div class="col-md-6" id="profile-col">
+                <div class="card" id="profile-event-card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{host_event.title}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{host_event.host}}</h6>
+                        <h6 class="card-text">{{host_event.day}}</h6>
+                        <h6 class="card-text">{{host_event.other}}</h6>
+                        <a href="{{ url_for('site.event', id=host_event.id) }}" class="card-link">View Attendees</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    {% endfor %}
 </div>
-
-{% endfor %}
 
 {% endblock content %}
