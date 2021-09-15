@@ -116,4 +116,5 @@ def event():
     participants = Participant.query.filter_by(event_id=event_id).all()
     return render_template('event.html', participants=participants, event=event)
 
-            
+# new route: form takes event name and outputs all attendees and each attendee's
+# percentage of attended events with same name
