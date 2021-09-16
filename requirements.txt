@@ -19,6 +19,7 @@ Flask-SQLAlchemy==2.5.1
 Flask-SSLify==0.1.5
 Flask-WTF==0.15.1
 greenlet==1.1.1
+gunicorn==20.1.0
 idna==3.2
 importlib-metadata==4.8.1
 importlib-resources==5.2.2
