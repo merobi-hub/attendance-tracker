@@ -2,23 +2,25 @@
 
 {% block content %}
 
-
-
-<div>
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        <div class="form-group">
-            <fieldset>
-                {{ form.email.label }}
-                {{ form.email(class = "form-control") }}
-            </fieldset>
-            <fieldset>
-                {{ form.password.label }}
-                {{ form.password(class = "form-control") }}
-            </fieldset>
-            {{ form.submit_button(class = "btn btn-primary btn-block") }}
+<div class="container">
+    <div class="row" id="form-row">
+        <div class="col-md-6" id="form-col">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <fieldset>
+                        {{ form.email.label }}
+                        {{ form.email(class = "form-control") }}
+                    </fieldset>
+                    <fieldset>
+                        {{ form.password.label }}
+                        {{ form.password(class = "form-control") }}
+                    </fieldset>
+                    {{ form.submit_button(class = "btn btn-primary btn-block") }}
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 
 {% endblock content %}

@@ -83,7 +83,7 @@ body {
 }
 
 .form-container {
-    margin-top: 10vh;
+    margin-top: 5vh;
     width: 100%
 }
 
@@ -117,7 +117,7 @@ body {
 /* Profile */
 
 #profile-event-card {
-    margin-top: 10vh;
+    margin-top: 5vh;
 }
 
 #profile-container {
@@ -141,4 +141,14 @@ body {
 
 #calculate-link {
     color: green;
+}
+
+#form-row {
+    width: 100%;
+    margin-top: 5vh
+}
+
+#form-col {
+    width: 50%;
+    margin: 0 auto
 }

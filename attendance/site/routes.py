@@ -4,7 +4,6 @@ from flask_login import login_required, current_user
 from attendance.forms import CreateEvent, CheckIn
 from attendance.models import db, Event, Participant
 import datetime, timedelta
-# from sqlalchemy import sessionmaker
 
 site = Blueprint('site', __name__, template_folder='site_templates')
 
