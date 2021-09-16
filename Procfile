@@ -1,0 +1,1 @@
+web: gunicorn attendance:app --preload --timeout 60
