@@ -22,3 +22,4 @@ class HostLogin(FlaskForm, UserMixin):
     password = PasswordField('Password', validators=[DataRequired()])
     submit_button = SubmitField()
 
+

@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from attendance.forms import CreateEvent, CheckIn
 from attendance.models import db, Event, Participant
 import datetime, timedelta
+# from sqlalchemy import sessionmaker
 
 site = Blueprint('site', __name__, template_folder='site_templates')
 
@@ -49,7 +50,7 @@ def newevent():
             db.session.add(event)
             db.session.commit()
 
-            flash(f'Your new event was created successfully', 'user-created')
+            flash(f'Your new event was created successfully.', 'user-created')
             return redirect(url_for('site.home'))
     except:
         flash(f'An error occurred. Please try again.')
@@ -64,13 +65,14 @@ def checkin():
     event_id = request.args.get('event_id', None)
     print('event_id: ', event_id)
     event = Event.query.filter_by(id=event_id).first()
-    # Merge day/time form inputs
+    # Combine day/time form inputs
     dt_str = event.day + ' ' + event.time
     # Convert day/time str to datetime object
     dt = datetime.datetime.strptime(dt_str, "%Y-%m-%d %H:%M:%S")
+    # Using dt, determine if event has begun and prevent early check-in
     start_time = dt
     if datetime.datetime.now() < start_time:
-        flash(f'Your check-in attempt was unsuccessful. Please wait for the event to start.', 'auth-failed')
+        flash(f'Please wait for the event to begin.', 'auth-failed')
         return redirect(url_for('site.home'))
     else:
         try:
@@ -82,7 +84,7 @@ def checkin():
                 db.session.add(checkin)
                 db.session.commit() 
 
-                flash(f'You have been checked in', 'user-created')
+                flash(f'You have been checked in.', 'user-created')
 
                 return redirect(url_for('site.home')) 
         except: 
@@ -107,6 +109,18 @@ def deleteevent():
     flash(f'The event has been deleted.', 'user-created')
     return redirect(url_for('site.profile'))
 
+@site.route('/removeparticipant', methods = ['GET', 'POST'])
+@login_required 
+def removeParticipant():
+    """Removes selected participant from an event"""
+    id = request.args.get('id', None)
+    first_name = request.args.get('first_name', None)
+    last_name = request.args.get('last_name', None)
+    Participant.query.filter_by(first_name=first_name, last_name=last_name, event_id=id).delete()
+    db.session.commit()
+    flash('The participant has been removed.', 'user-created')
+    return redirect(url_for('site.profile'))
+
 @site.route('/event')
 @login_required
 def event():
@@ -118,3 +132,24 @@ def event():
 
 # new route: form takes event name and outputs all attendees and each attendee's
 # percentage of attended events with same name
+@site.route('/calculate')
+@login_required 
+def calculate():
+    
+    first_name = request.args.get('first_name', None)
+    last_name = request.args.get('last_name', None)
+    title = request.args.get('title', None)
+    events = Event.query.filter_by(title=title).all()
+    # Get total number of events with title
+    total_events = 0
+    for event in events:
+        total_events += 1
+    # Get number of events with title attended by participant
+    participant_events = 0
+    for p, e in db.session.query(Participant, Event).filter(Participant.event_id == Event.id).all():
+        if p.first_name == first_name and p.last_name == last_name:
+            participant_events += 1
+    participant_attendance = (participant_events * 100) / total_events
+    name = first_name + ' ' + last_name
+    return render_template('calculate.html', title=title, name=name, attendance=participant_attendance)
+

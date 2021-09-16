@@ -138,3 +138,7 @@ body {
 #delete {
     color: red;
 }
+
+#calculate-link {
+    color: green;
+}
