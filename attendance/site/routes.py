@@ -42,10 +42,11 @@ def newevent():
             day = form.day.data
             time = form.time.data
             duration = form.duration.data
-            other = form.other.data 
+            other = form.other.data
+            passkey = form.passkey.data 
             user_id = current_user.id
 
-            event = Event(title, host, day, time, duration, other, user_id)
+            event = Event(title, host, day, time, duration, other, passkey, user_id)
             db.session.add(event)
             db.session.commit()
 
@@ -64,6 +65,7 @@ def checkin():
     event_id = request.args.get('event_id', None)
     print('event_id: ', event_id)
     event = Event.query.filter_by(id=event_id).first()
+
     # Combine day/time form inputs
     dt_str = event.day + ' ' + event.time
     # Convert day/time str to datetime object
@@ -75,17 +77,43 @@ def checkin():
         return redirect(url_for('site.home'))
     else:
         try:
-            if request.method == 'POST' and form.validate_on_submit(): 
-                first_name = form.first_name.data 
-                last_name = form.last_name.data
+            if request.method == 'POST' and form.validate_on_submit():
 
-                checkin = Participant(first_name, last_name, event_id)
-                db.session.add(checkin)
-                db.session.commit() 
+                if event.passkey != None:
 
-                flash(f'You have been checked in.', 'user-created')
+                    if form.passkey.data is not None:
 
-                return redirect(url_for('site.home')) 
+                        passkey = form.passkey.data
+
+                        if event.passkey == passkey:
+
+                            first_name = form.first_name.data 
+                            last_name = form.last_name.data
+                            checkin = Participant(first_name, last_name, event_id)
+                            db.session.add(checkin)
+                            db.session.commit() 
+
+                            flash(f'You have been checked in.', 'user-created')
+
+                            return redirect(url_for('site.home'))
+
+                        elif event.passkey != passkey:
+
+                            flash(f'Incorrect passkey. Please try again.', 'auth-failed')
+
+                            return redirect(url_for('site.home'))
+
+                else:
+
+                    first_name = form.first_name.data 
+                    last_name = form.last_name.data
+                    checkin = Participant(first_name, last_name, event_id)
+                    db.session.add(checkin)
+                    db.session.commit() 
+
+                    flash(f'You have been checked in.', 'user-created')
+
+                    return redirect(url_for('site.home'))
         except: 
             raise Exception('An error occurred. Please try again.') 
 
@@ -134,7 +162,7 @@ def event():
 @site.route('/calculate')
 @login_required 
 def calculate():
-    
+    """Displays attendees and each attendee's percentage of attended events with same name"""
     first_name = request.args.get('first_name', None)
     last_name = request.args.get('last_name', None)
     title = request.args.get('title', None)

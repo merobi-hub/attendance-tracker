@@ -39,6 +39,7 @@ class Event(db.Model, UserMixin):
     time = db.Column(db.String(8))
     duration = db.Column(db.String(5))
     other = db.Column(db.String(200), nullable=True)
+    passkey = db.Column(db.String(20), nullable=True)
     user_id = db.Column(db.String, db.ForeignKey('user.id'), nullable=False)
 
     def __init__(
@@ -49,6 +50,7 @@ class Event(db.Model, UserMixin):
         time,
         duration,
         other,
+        passkey,
         user_id,
         id = ''
         ):
@@ -59,6 +61,7 @@ class Event(db.Model, UserMixin):
         self.time = time 
         self.duration = duration 
         self.other = other
+        self.passkey = passkey
         self.user_id = user_id  
 
     def __repr__(self):

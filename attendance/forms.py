@@ -10,11 +10,13 @@ class CreateEvent(FlaskForm, UserMixin):
     time = TextAreaField('Time (use 24-hour clock in format hh:mm:ss)', validators=[DataRequired()])
     duration = TextAreaField('Duration (minutes)', validators=[DataRequired()])
     other = TextAreaField('Other')
+    passkey = TextAreaField('Optional Passkey (provide to attendees)')
     submit_button = SubmitField()
 
 class CheckIn(FlaskForm):
     first_name = TextAreaField('First Name', validators=[DataRequired()])
     last_name = TextAreaField('Last Name', validators=[DataRequired()])
+    passkey = TextAreaField('Passkey (if provided)')
     submit_button = SubmitField()
 
 class HostLogin(FlaskForm, UserMixin):
