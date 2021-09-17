@@ -131,6 +131,7 @@ def profile():
 def deleteevent():
     """Permits host to delete an event"""
     id = request.args.get('id', None)
+    Participant.query.filter_by(event_id=id).delete()
     Event.query.filter_by(id=id).delete()
     db.session.commit()
     flash(f'The event has been deleted.', 'user-created')
