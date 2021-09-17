@@ -19,6 +19,11 @@ class CheckIn(FlaskForm):
     passkey = TextAreaField('Passkey (if provided)')
     submit_button = SubmitField()
 
+class AddParticipant(FlaskForm):
+    first_name = TextAreaField('First Name', validators=[DataRequired()])
+    last_name = TextAreaField('Last Name', validators=[DataRequired()])
+    submit_button = SubmitField()
+
 class HostLogin(FlaskForm, UserMixin):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])

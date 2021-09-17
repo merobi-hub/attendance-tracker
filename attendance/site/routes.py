@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect
 from flask.helpers import url_for
 from flask_login import login_required, current_user
-from attendance.forms import CreateEvent, CheckIn
+from attendance.forms import AddParticipant, CreateEvent, CheckIn
 from attendance.models import db, Event, Participant
 import datetime, timedelta
 
@@ -63,7 +63,6 @@ def checkin():
     """Displays checkin form and checks in participant if event has begun"""
     form = CheckIn()
     event_id = request.args.get('event_id', None)
-    print('event_id: ', event_id)
     event = Event.query.filter_by(id=event_id).first()
 
     # Combine day/time form inputs
@@ -78,17 +77,12 @@ def checkin():
     else:
         try:
             if request.method == 'POST' and form.validate_on_submit():
-
                 if event.passkey != None:
-
                     if form.passkey.data is not None:
-
                         passkey = form.passkey.data
-
                         if event.passkey == passkey:
-
-                            first_name = form.first_name.data 
-                            last_name = form.last_name.data
+                            first_name = form.first_name.data.title() 
+                            last_name = form.last_name.data.title()
                             checkin = Participant(first_name, last_name, event_id)
                             db.session.add(checkin)
                             db.session.commit() 
@@ -102,11 +96,10 @@ def checkin():
                             flash(f'Incorrect passkey. Please try again.', 'auth-failed')
 
                             return redirect(url_for('site.home'))
-
                 else:
 
-                    first_name = form.first_name.data 
-                    last_name = form.last_name.data
+                    first_name = form.first_name.data.title() 
+                    last_name = form.last_name.data.title()
                     checkin = Participant(first_name, last_name, event_id)
                     db.session.add(checkin)
                     db.session.commit() 
@@ -180,4 +173,31 @@ def calculate():
     participant_attendance = (participant_events * 100) / total_events
     name = first_name + ' ' + last_name
     return render_template('calculate.html', title=title, name=name, attendance=participant_attendance)
+
+@site.route('/addparticipant', methods = ['GET', 'POST'])
+@login_required 
+def addParticipant():
+    """
+    Adds a participant to an event from the profile route. Simplified by
+    exclusion of passkey and day/time checking.
+    """
+    form = AddParticipant()
+    event_id = request.args.get('id', None)
+    try:
+        if request.method == 'POST' and form.validate_on_submit():
+            
+            first_name = form.first_name.data.title() 
+            last_name = form.last_name.data.title()
+            checkin = Participant(first_name, last_name, event_id)
+            db.session.add(checkin)
+            db.session.commit() 
+
+            flash(f'Participant has been added.', 'user-created')
+
+            return redirect(url_for('site.profile'))
+    except: 
+        raise Exception('An error occurred. Please try again.') 
+
+    return render_template('addparticipant.html', form=form)
+
 

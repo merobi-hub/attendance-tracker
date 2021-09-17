@@ -16,6 +16,7 @@
                         <h6 class="card-text">Passkey: {{host_event.passkey}}</h6>
                         <a href="{{ url_for('site.event', id=host_event.id) }}" class="card-link">View Attendees</a>
                         <a href="{{ url_for('site.deleteevent', id=host_event.id) }}" class="card-link" id="delete">Delete</a>
+                        <a href="{{ url_for('site.addParticipant', id=host_event.id) }}" class="card-link">Add Participant</a>
                     </div>
                 </div>
             </div>
