@@ -76,6 +76,7 @@ def checkin():
         flash(f'Please wait for the event to begin.', 'auth-failed')
         return redirect(url_for('site.home'))
     else:
+    # Look for passkey in db and, if needed, request from attendee before checking in
         try:
             if request.method == 'POST' and form.validate_on_submit():
                 if event.passkey != None:
@@ -116,7 +117,7 @@ def checkin():
 @site.route('/profile')
 @login_required
 def profile():
-    """Displays all events hosted by the current user"""
+    """Displays all events hosted by the current user, ordered by event date"""
     host_events = Event.query.filter_by(user_id=current_user.id).order_by(Event.day.desc()).all()
     return render_template('profile.html', host_events=host_events)
 
@@ -152,8 +153,6 @@ def event():
     participants = Participant.query.filter_by(event_id=event_id).all()
     return render_template('event.html', participants=participants, event=event)
 
-# new route: form takes event name and outputs all attendees and each attendee's
-# percentage of attended events with same name
 @site.route('/calculate')
 @login_required 
 def calculate():
