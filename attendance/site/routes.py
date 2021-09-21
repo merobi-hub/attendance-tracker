@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from attendance.forms import AddParticipant, CreateEvent, CheckIn
 from attendance.models import db, Event, Participant
 import datetime, timedelta
+from sqlalchemy import desc
 
 site = Blueprint('site', __name__, template_folder='site_templates')
 
@@ -116,7 +117,7 @@ def checkin():
 @login_required
 def profile():
     """Displays all events hosted by the current user"""
-    host_events = Event.query.filter_by(user_id=current_user.id).all()
+    host_events = Event.query.filter_by(user_id=current_user.id).order_by(Event.day.desc()).all()
     return render_template('profile.html', host_events=host_events)
 
 @site.route('/deleteevent', methods = ['GET', 'POST'])
