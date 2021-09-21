@@ -200,4 +200,48 @@ def addParticipant():
 
     return render_template('addparticipant.html', form=form)
 
+@site.route('/editevent', methods = ['GET', 'POST'])
+@login_required 
+def editevent():
+    """Allows a host to edit an event."""
+    form = CreateEvent()
+    event_id = request.args.get('id', None)
+    title = request.args.get('title', None)
+    host = request.args.get('host', None)
+    day = request.args.get('day', None)
+    time = request.args.get('time', None)
+    duration = request.args.get('duration', None)
+    other = request.args.get('other', None)
+    passkey = request.args.get('passkey', None)
 
+    try:
+        if request.method == 'POST' and form.validate_on_submit():
+            Event.query.filter_by(id=event_id).update({
+                "title": (form.title.data),
+                "host": (form.host.data),
+                "day": (form.day.data),
+                "time": (form.time.data),
+                "duration": (form.duration.data),
+                "other": (form.other.data),
+                "passkey": (form.passkey.data),
+                "user_id": (current_user.id)
+            })
+            db.session.commit() 
+
+            flash(f'The {form.title.data} event has been updated.', 'user-created')
+
+            return redirect(url_for('site.home'))
+    except:
+        raise Exception('An error occurred. Please try again.')
+
+    return render_template(
+        'editevent.html', 
+        form=form, 
+        title=title,
+        host=host,
+        day=day,
+        time=time,
+        duration=duration,
+        other=other,
+        passkey=passkey
+        )

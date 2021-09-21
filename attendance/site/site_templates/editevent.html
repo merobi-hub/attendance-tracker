@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="form-container">
+    <div class="row" id="form-row">
+        <div class="col-md-6" id="form-col">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <fieldset>
+                        {{ form.title.label }}
+                        {{ form.title(class = "form-control", placeholder=title) }}
+                    </fieldset>
+                    <fieldset>
+                        {{ form.host.label }}
+                        {{ form.host(class = "form-control", placeholder=host) }}
+                    </fieldset>
+                    <fieldset>
+                        {{ form.day.label }}
+                        {{ form.day(class = "form-control", placeholder=day) }}
+                    </fieldset>
+                    <fieldset>
+                        {{ form.time.label }}
+                        {{ form.time(class = "form-control", placeholder=time) }}
+                    </fieldset>
+                    <fieldset>
+                        {{ form.duration.label }}
+                        {{ form.duration(class = "form-control", placeholder=duration) }}
+                    </fieldset>
+                    <fieldset>
+                        {{ form.other.label }}
+                        {{ form.other(class = "form-control", placeholder=other) }}
+                    </fieldset>
+                    <fieldset>
+                        {{ form.passkey.label }}
+                        {{ form.passkey(class = "form-control", placeholder=passkey) }}
+                    </fieldset>
+                    {{ form.submit_button(class = "btn btn-primary btn-block") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

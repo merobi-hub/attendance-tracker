@@ -2,7 +2,7 @@
 
 ### Purpose
 
-This minimalist event management app simplifies event sign-up for both users and hosts. Attendees can check in to events without registering as site users, keeping the effort minimal for guests. Only on-going and upcoming events are presented to site visitors, minimizing the potential for confusion about which event to join and, by extension, preventing the creation of bad data. Behind login-protected routes, hosts can secure events with passkeys, view attendance percentages of repeat guests, add and remove attendees, and delete events.        
+This minimalist event management app simplifies event sign-up for both users and hosts. Attendees can check in to events without registering as site users, keeping the effort minimal for guests. Only on-going and upcoming events are presented to site visitors, minimizing the potential for confusion about which event to join and, by extension, the creation of bad data. Behind login-protected routes, hosts can secure events with passkeys, view attendance percentages of repeat guests, add and remove attendees, and delete events.        
 
 ### Technologies
 
