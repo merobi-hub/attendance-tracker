@@ -136,8 +136,17 @@ body {
 }
 
 #delete {
-    color: red;
+    color: white;
+    background: red;
 }
+
+#edit {
+    color: black;
+    background: yellow;
+    margin-right: 2vw;
+}
+
+
 
 #calculate-link {
     color: green;
