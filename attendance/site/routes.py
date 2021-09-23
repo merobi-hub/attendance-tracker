@@ -156,23 +156,27 @@ def event():
 @site.route('/calculate')
 @login_required 
 def calculate():
-    """Displays attendees and each attendee's percentage of attended events with same name"""
+    """
+    Displays attendees and each attendee's percentage of attended events with 
+    same 'title' and 'other' data
+    """
     first_name = request.args.get('first_name', None)
     last_name = request.args.get('last_name', None)
     title = request.args.get('title', None)
-    events = Event.query.filter_by(title=title).all()
+    other = request.args.get('other', None)
+    events = Event.query.filter_by(title=title, other=other).all()
     # Get total number of events with title
     total_events = 0
     for event in events:
         total_events += 1
     # Get number of events with title attended by participant
     participant_events = 0
-    for p, e in db.session.query(Participant, Event).filter(Participant.event_id == Event.id).all():
+    for p, e in db.session.query(Participant, Event).filter(Participant.event_id == Event.id, Event.title == title, Event.other == other).all():
         if p.first_name == first_name and p.last_name == last_name:
             participant_events += 1
     participant_attendance = (participant_events * 100) / total_events
     name = first_name + ' ' + last_name
-    return render_template('calculate.html', title=title, name=name, attendance=participant_attendance)
+    return render_template('calculate.html', title=title, other=other, name=name, attendance=participant_attendance)
 
 @site.route('/addparticipant', methods = ['GET', 'POST'])
 @login_required 
@@ -203,7 +207,7 @@ def addParticipant():
 @site.route('/editevent', methods = ['GET', 'POST'])
 @login_required 
 def editevent():
-    """Allows a host to edit an event."""
+    """Allows a host to edit an event. Populates form with existing data for reference."""
     form = CreateEvent()
     event_id = request.args.get('id', None)
     title = request.args.get('title', None)
