@@ -6,6 +6,8 @@ from flask_migrate import Migrate
 from attendance import models
 from attendance.models import db as root_db, login_manager
 from flask_sqlalchemy import SQLAlchemy
+from oauthlib.oauth2 import WebApplicationClient
+from oauth_var.oauth_var import GOOGLE_CLIENT_ID
 
 app = Flask(__name__)
 
@@ -20,7 +22,6 @@ migrate = Migrate(app, root_db)
 login_manager.init_app(app)
 login_manager.login_view = 'auth.login'
 
-
-
-
+# OAuth 2 client setup
+client = WebApplicationClient(GOOGLE_CLIENT_ID)
 

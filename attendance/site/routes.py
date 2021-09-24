@@ -10,7 +10,7 @@ site = Blueprint('site', __name__, template_folder='site_templates')
 
 @site.route('/') 
 def home():
-    """Displays current and upcoming events"""
+    """Displays current and upcoming events."""
     events = Event.query.all()
     live_events = []
     for event in events:
@@ -34,7 +34,7 @@ def home():
 @site.route('/newevent', methods = ['GET', 'POST'])
 @login_required
 def newevent():
-    """Displays CreateEvent form and processes new event submission"""
+    """Displays CreateEvent form and processes new event submission."""
     form = CreateEvent()
     try:
         if request.method == 'POST' and form.validate_on_submit():
@@ -61,7 +61,7 @@ def newevent():
 
 @site.route('/checkin', methods = ['GET', 'POST']) 
 def checkin():
-    """Displays checkin form and checks in participant if event has begun"""
+    """Displays checkin form and checks in participant if event has begun."""
     form = CheckIn()
     event_id = request.args.get('event_id', None)
     event = Event.query.filter_by(id=event_id).first()
@@ -117,14 +117,16 @@ def checkin():
 @site.route('/profile')
 @login_required
 def profile():
-    """Displays all events hosted by the current user, ordered by event date"""
+    """Displays all events hosted by the current user, ordered by event date."""
     host_events = Event.query.filter_by(user_id=current_user.id).order_by(Event.day.desc()).all()
     return render_template('profile.html', host_events=host_events)
 
 @site.route('/deleteevent', methods = ['GET', 'POST'])
 @login_required
 def deleteevent():
-    """Permits host to delete an event"""
+    """Deletes an event. Rows in the Participant and Event tables with matching 
+    'event_id' (Participant) and 'id' (Event) values are deleted.
+    """
     id = request.args.get('id', None)
     Participant.query.filter_by(event_id=id).delete()
     Event.query.filter_by(id=id).delete()
@@ -135,11 +137,15 @@ def deleteevent():
 @site.route('/removeparticipant', methods = ['GET', 'POST'])
 @login_required 
 def removeParticipant():
-    """Removes selected participant from an event"""
+    """Removes selected participant from an event."""
     id = request.args.get('id', None)
     first_name = request.args.get('first_name', None)
     last_name = request.args.get('last_name', None)
-    Participant.query.filter_by(first_name=first_name, last_name=last_name, event_id=id).delete()
+    Participant.query.filter_by(
+        first_name=first_name, 
+        last_name=last_name, 
+        event_id=id
+        ).delete()
     db.session.commit()
     flash('The participant has been removed.', 'user-created')
     return redirect(url_for('site.profile'))
@@ -147,7 +153,7 @@ def removeParticipant():
 @site.route('/event')
 @login_required
 def event():
-    """Displays all participants checked into an event"""
+    """Displays all participants checked into an event."""
     event_id = request.args.get('id', None)
     event = Event.query.filter_by(id=event_id).first()
     participants = Participant.query.filter_by(event_id=event_id).all()
@@ -157,8 +163,8 @@ def event():
 @login_required 
 def calculate():
     """
-    Displays attendees and each attendee's percentage of attended events with 
-    same 'title' and 'other' data
+    Displays an attendee's percentage of attended events with the same 'title' 
+    and 'other' data.
     """
     first_name = request.args.get('first_name', None)
     last_name = request.args.get('last_name', None)
@@ -171,19 +177,29 @@ def calculate():
         total_events += 1
     # Get number of events with title attended by participant
     participant_events = 0
-    for p, e in db.session.query(Participant, Event).filter(Participant.event_id == Event.id, Event.title == title, Event.other == other).all():
+    for p, e in db.session.query(Participant, Event).filter(
+        Participant.event_id == Event.id, 
+        Event.title == title, 
+        Event.other == other
+        ).all():
         if p.first_name == first_name and p.last_name == last_name:
             participant_events += 1
     participant_attendance = (participant_events * 100) / total_events
     name = first_name + ' ' + last_name
-    return render_template('calculate.html', title=title, other=other, name=name, attendance=participant_attendance)
+    return render_template(
+        'calculate.html', 
+        title=title, 
+        other=other, 
+        name=name, 
+        attendance=participant_attendance
+        )
 
 @site.route('/addparticipant', methods = ['GET', 'POST'])
 @login_required 
 def addParticipant():
     """
-    Adds a participant to an event from the profile route. Simplified by
-    exclusion of passkey and day/time checking.
+    Allows a host to add a participant to an event from the profile route. 
+    Simplified by exclusion of passkey and day/time checking.
     """
     form = AddParticipant()
     event_id = request.args.get('id', None)
@@ -207,7 +223,10 @@ def addParticipant():
 @site.route('/editevent', methods = ['GET', 'POST'])
 @login_required 
 def editevent():
-    """Allows a host to edit an event. Populates form with existing data for reference."""
+    """
+    Allows a host to edit an event. Populates the form with existing data from 
+    the db for reference.
+    """
     form = CreateEvent()
     event_id = request.args.get('id', None)
     title = request.args.get('title', None)
