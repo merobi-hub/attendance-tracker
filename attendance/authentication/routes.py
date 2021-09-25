@@ -4,8 +4,14 @@ from werkzeug.security import check_password_hash
 from flask_login import login_user, logout_user, login_required
 from attendance.forms import HostLogin
 from attendance.models import User, db
+import requests
+from oauthlib.oauth2 import WebApplicationClient
+from config import Config
 
 auth = Blueprint('auth', __name__, template_folder='auth_templates') 
+
+# OAuth 2 client setup
+client = WebApplicationClient(Config.GOOGLE_CLIENT_ID)
 
 @auth.route('/signup', methods = ['GET', 'POST'])
 def signup():
@@ -50,6 +56,21 @@ def login():
         raise Exception('An error occurred. Please try again.')
 
     return render_template('login.html', form=form)
+
+@auth.route('/google')
+def google():
+    def get_google_provider_cfg():
+        return requests.get(Config.GOOGLE_DISCOVERY_URL).json()
+    google_provider_cfg = get_google_provider_cfg()
+    authorization_endpoint = google_provider_cfg["authorization_endpoint"]
+
+    request_uri = client.prepare_request_uri(
+        authorization_endpoint,
+        redirect_uri = request.base_url + "/callback",
+        scope = ["openid", "email", "profile"],
+    )
+    return redirect(request_uri)
+
 
 @auth.route('/logout')
 @login_required
