@@ -48,6 +48,45 @@ body {
     color:black;
 }
 
+/* Small Nav */
+
+.small-top-nav {
+    
+}
+
+#small-nav-col {
+    text-align: center;
+    padding-top: 2vh;
+}
+
+#small-nav-col-hosts {
+    color: white;
+    text-align: center;
+}
+
+.small-nav-div {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 5vh;
+}
+
+#small-nav-links {
+    margin: 0 auto;
+}
+
+#small-nav-link {
+    text-decoration: none;
+    color: black;
+    
+}
+
+#small-nav-link-hosts {
+    background-color: gray;
+    text-decoration: none;
+    color: white;
+}
+
+
 /* Event Button */
 
 #button-div {
@@ -160,4 +199,17 @@ body {
 #form-col {
     width: 50%;
     margin: 0 auto
+}
+
+/* Log in */
+
+#sign-up-row {
+    margin-top: 5vh;
+    width: 100%;
+}
+
+#sign-up-col {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
 }

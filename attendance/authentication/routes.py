@@ -57,7 +57,7 @@ def login():
 
     return render_template('login.html', form=form)
 
-@auth.route('/google')
+@auth.route('/google', methods = ['GET', 'POST'])
 def google():
     def get_google_provider_cfg():
         return requests.get(Config.GOOGLE_DISCOVERY_URL).json()
