@@ -177,6 +177,7 @@ body {
 #delete {
     color: white;
     background: red;
+    margin-right: 2vw;
 }
 
 #edit {
