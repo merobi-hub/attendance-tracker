@@ -71,6 +71,9 @@ def google():
     )
     return redirect(request_uri)
 
+@auth.route('/google/callback', methods = ['GET', 'POST'])
+def callback():
+    return redirect(url_for('site.home'))
 
 @auth.route('/logout')
 @login_required
