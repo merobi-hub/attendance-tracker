@@ -24,7 +24,7 @@ Each event's unique page lists all participants. Links allow hosts to remove par
 
 ![profile image](attendance/static/images/attend_profile.png)
 
-A host's profile displays all events ever created by that host and offers more detailed information via links.
+A host's profile displays all events ever created by that host and features links to routes allowing for adding of participants and editing/deleting of events, as well as more detailed information about attendees.
 
 ## License
 
