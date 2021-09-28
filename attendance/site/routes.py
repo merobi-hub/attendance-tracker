@@ -124,7 +124,8 @@ def profile():
 @site.route('/deleteevent', methods = ['GET', 'POST'])
 @login_required
 def deleteevent():
-    """Deletes an event. Rows in the Participant and Event tables with matching 
+    """
+    Deletes an event. Rows in the Participant and Event tables with matching 
     'event_id' (Participant) and 'id' (Event) values are deleted.
     """
     id = request.args.get('id', None)

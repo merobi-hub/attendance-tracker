@@ -111,14 +111,36 @@ body {
     margin-top: 10vh;  */
 } 
 
-#event-container {
-    margin-top: 10vh
-}
-
 /* event.html */
 
+#event-container {
+    margin-top: 10vh;
+    width: 100%;
+}
+
+
+
+#event-title-row {
+    width: 50%;
+    margin: 0 auto
+}
+
+#event-participant-row {
+    width: 50%;
+    margin: 0 auto
+}
+
+#event-col {
+    margin: 0 auto
+}
+
+#event-participant-col {
+    margin: 0 auto
+}
+
 #participant-list {
-    margin-top: 10vh
+    margin-top: 10vh;
+    
 }
 
 .form-container {
@@ -134,6 +156,10 @@ body {
 .form-group {
     width: 50%;
     margin: 0 auto
+}
+
+#participant-card {
+    margin-bottom: 3vh;
 }
 
 /* index.html */

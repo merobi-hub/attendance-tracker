@@ -2,27 +2,29 @@
 
 {% block content %}
 <div class="container" id="event-container">
-    <div class="row">
-        <div class="col-md-4">
-            <h2>{{event.title}}</h2> 
-            <h4>Date: {{event.day}}</h4> 
-            <h4>Notes: {{event.other}}</h4>
+    <div class="container" id="event-sub-container">
+        <div class="row" id="event-title-row">
+            <div class="col-md-6" id="event-col">
+                <h2>{{event.title}}</h2> 
+                <h4>Date: {{event.day}}</h4> 
+                <h4>Notes: {{event.other}}</h4>
+            </div>
         </div>
-    </div>
-    <div id="participant-list">
-        {% for participant in participants %}
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{participant.first_name}} {{participant.last_name}}</h5>
-                        <a href="{{ url_for('site.removeParticipant', id=participant.event_id, first_name=participant.first_name, last_name=participant.last_name) }}" class="btn btn-primary" id="delete">Remove</a>
-                        <a href="{{ url_for('site.calculate', title=event.title, other=event.other, first_name=participant.first_name, last_name=participant.last_name) }}" class="card-link" id="calculate-link">Attendance</a>
+        <div id="participant-list">
+            {% for participant in participants %}
+            <div class="row" id="event-participant-row">
+                <div class="col-md-6" id="event-participant-col">
+                    <div class="card" id="participant-card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{participant.first_name}} {{participant.last_name}}</h5>
+                            <a href="{{ url_for('site.removeParticipant', id=participant.event_id, first_name=participant.first_name, last_name=participant.last_name) }}" class="btn btn-primary" id="delete">Remove</a>
+                            <a href="{{ url_for('site.calculate', title=event.title, other=event.other, first_name=participant.first_name, last_name=participant.last_name) }}" class="card-link" id="calculate-link">Attendance</a>
+                        </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
 {% endblock content %}
