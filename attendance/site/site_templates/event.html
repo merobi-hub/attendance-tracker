@@ -8,6 +8,7 @@
                 <h2>{{event.title}}</h2> 
                 <h4>Date: {{event.day}}</h4> 
                 <h4>Notes: {{event.other}}</h4>
+                <a href="{{ url_for('site.calculateAll', title=event.title, other=event.other) }}">Total Attendance</a>
             </div>
         </div>
         <div id="participant-list">

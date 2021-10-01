@@ -172,7 +172,7 @@ def calculate():
     title = request.args.get('title', None)
     other = request.args.get('other', None)
     events = Event.query.filter_by(title=title, other=other).all()
-    # Get total number of events with title
+    # Get total number of events with title and other data
     total_events = 0
     for event in events:
         total_events += 1
@@ -192,8 +192,29 @@ def calculate():
         title=title, 
         other=other, 
         name=name, 
-        attendance=participant_attendance
+        attendance=participant_attendance,
+        total_events=total_events
         )
+
+@site.route('/calculateall')
+@login_required
+def calculateAll():
+    """"""
+    title = request.args.get('title', None)
+    other = request.args.get('other', None)
+    events = Event.query.filter_by(title=title, other=other).all()
+    total_events = 0 
+    for event in events:
+        total_events += 1 
+    # participants = db.session.query(Participant, Event).filter(
+    #     Participant.event_id == Event.id, 
+    #     Event.title == title,
+    #     Event.other == other
+    #     ).all()
+    # total_attendance = []
+    # for p in participants:
+    #     p_attendance = 
+
 
 @site.route('/addparticipant', methods = ['GET', 'POST'])
 @login_required 

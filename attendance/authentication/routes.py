@@ -8,10 +8,12 @@ import requests
 from oauthlib.oauth2 import WebApplicationClient
 from config import Config
 
+
 auth = Blueprint('auth', __name__, template_folder='auth_templates') 
 
 # OAuth 2 client setup
 client = WebApplicationClient(Config.GOOGLE_CLIENT_ID)
+
 
 @auth.route('/signup', methods = ['GET', 'POST'])
 def signup():
