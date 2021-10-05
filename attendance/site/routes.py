@@ -206,15 +206,27 @@ def calculateAll():
     total_events = 0 
     for event in events:
         total_events += 1 
-    # participants = db.session.query(Participant, Event).filter(
-    #     Participant.event_id == Event.id, 
-    #     Event.title == title,
-    #     Event.other == other
-    #     ).all()
-    # total_attendance = []
-    # for p in participants:
-    #     p_attendance = 
-
+    participants = db.session.query(Participant, Event).filter(
+        Participant.event_id == Event.id, 
+        Event.title == title,
+        Event.other == other
+        ).all()
+    # for p, e in participants:
+    #     print(p.first_name)
+    #     print(p.last_name)
+    total_attendance = {}
+    for p, e in participants:
+        if p.first_name + ' ' + p.last_name in total_attendance.keys():
+            total_attendance[p.first_name + ' ' + p.last_name] += 1
+        else:
+            total_attendance[p.first_name + ' ' + p.last_name] = 1
+    print(total_attendance)
+    return render_template(
+        'calculateall.html', 
+        title=title, 
+        other=other, 
+        total_attendance=total_attendance
+        )
 
 @site.route('/addparticipant', methods = ['GET', 'POST'])
 @login_required 
