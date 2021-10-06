@@ -38,13 +38,13 @@ def newevent():
     form = CreateEvent()
     try:
         if request.method == 'POST' and form.validate_on_submit():
-            title = form.title.data
-            host = form.host.data
-            day = form.day.data
-            time = form.time.data
-            duration = form.duration.data
-            other = form.other.data
-            passkey = form.passkey.data 
+            title = form.title.data.strip().title()
+            host = form.host.data.strip().title()
+            day = form.day.data.strip()
+            time = form.time.data.strip()
+            duration = form.duration.data.strip()
+            other = form.other.data.strip().title()
+            passkey = form.passkey.data.strip() 
             user_id = current_user.id
 
             event = Event(title, host, day, time, duration, other, passkey, user_id)
@@ -83,8 +83,8 @@ def checkin():
                     if form.passkey.data is not None:
                         passkey = form.passkey.data
                         if event.passkey == passkey:
-                            first_name = form.first_name.data.title() 
-                            last_name = form.last_name.data.title()
+                            first_name = form.first_name.data.strip().title() 
+                            last_name = form.last_name.data.strip().title()
                             checkin = Participant(first_name, last_name, event_id)
                             db.session.add(checkin)
                             db.session.commit() 
@@ -100,8 +100,8 @@ def checkin():
                             return redirect(url_for('site.home'))
                 else:
 
-                    first_name = form.first_name.data.title() 
-                    last_name = form.last_name.data.title()
+                    first_name = form.first_name.data.strip().title() 
+                    last_name = form.last_name.data.strip().title()
                     checkin = Participant(first_name, last_name, event_id)
                     db.session.add(checkin)
                     db.session.commit() 
@@ -216,10 +216,10 @@ def calculateAll():
     #     print(p.last_name)
     total_attendance = {}
     for p, e in participants:
-        if p.first_name + ' ' + p.last_name in total_attendance.keys():
-            total_attendance[p.first_name + ' ' + p.last_name] += 1
+        if p.first_name.strip() + ' ' + p.last_name.strip() in total_attendance.keys():
+            total_attendance[p.first_name.strip() + ' ' + p.last_name.strip()] += 1
         else:
-            total_attendance[p.first_name + ' ' + p.last_name] = 1
+            total_attendance[p.first_name.strip() + ' ' + p.last_name.strip()] = 1
     print(total_attendance)
     return render_template(
         'calculateall.html', 
@@ -240,8 +240,8 @@ def addParticipant():
     try:
         if request.method == 'POST' and form.validate_on_submit():
             
-            first_name = form.first_name.data.title() 
-            last_name = form.last_name.data.title()
+            first_name = form.first_name.data.strip().title() 
+            last_name = form.last_name.data.strip().title()
             checkin = Participant(first_name, last_name, event_id)
             db.session.add(checkin)
             db.session.commit() 
@@ -274,13 +274,13 @@ def editevent():
     try:
         if request.method == 'POST' and form.validate_on_submit():
             Event.query.filter_by(id=event_id).update({
-                "title": (form.title.data),
-                "host": (form.host.data),
-                "day": (form.day.data),
-                "time": (form.time.data),
-                "duration": (form.duration.data),
-                "other": (form.other.data),
-                "passkey": (form.passkey.data),
+                "title": (form.title.data.strip().title()),
+                "host": (form.host.data.strip().title()),
+                "day": (form.day.data.strip()),
+                "time": (form.time.data.strip()),
+                "duration": (form.duration.data.strip()),
+                "other": (form.other.data.strip()),
+                "passkey": (form.passkey.data.strip()),
                 "user_id": (current_user.id)
             })
             db.session.commit() 
