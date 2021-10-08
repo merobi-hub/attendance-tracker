@@ -13,12 +13,18 @@ body {
 }
 
 #home-title-row {
-    text-align: center
+    text-align: center;
+    font-family: monospace;
 }
 
 #home-title-col {
     width: 50%;
     margin: 0 auto
+}
+
+.home-title-text {
+    font-size: 550%;
+    /* font-weight: bold; */
 }
 
 /* Nav */

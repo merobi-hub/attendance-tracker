@@ -220,7 +220,7 @@ def calculateAll():
             total_attendance[p.first_name.strip() + ' ' + p.last_name.strip()] += 1
         else:
             total_attendance[p.first_name.strip() + ' ' + p.last_name.strip()] = 1
-    print(total_attendance)
+    # print(total_attendance)
     return render_template(
         'calculateall.html', 
         title=title, 
