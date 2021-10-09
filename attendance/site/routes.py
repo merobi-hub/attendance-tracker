@@ -38,7 +38,7 @@ def newevent():
     form = CreateEvent()
     try:
         if request.method == 'POST' and form.validate_on_submit():
-            title = form.title.data.strip().title()
+            title = form.title.data.strip()
             host = form.host.data.strip().title()
             day = form.day.data.strip()
             time = form.time.data.strip()
@@ -274,7 +274,7 @@ def editevent():
     try:
         if request.method == 'POST' and form.validate_on_submit():
             Event.query.filter_by(id=event_id).update({
-                "title": (form.title.data.strip().title()),
+                "title": (form.title.data.strip()),
                 "host": (form.host.data.strip().title()),
                 "day": (form.day.data.strip()),
                 "time": (form.time.data.strip()),
