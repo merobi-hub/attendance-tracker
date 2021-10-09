@@ -220,12 +220,14 @@ def calculateAll():
             total_attendance[p.first_name.strip() + ' ' + p.last_name.strip()] += 1
         else:
             total_attendance[p.first_name.strip() + ' ' + p.last_name.strip()] = 1
+
     # print(total_attendance)
     return render_template(
         'calculateall.html', 
         title=title, 
         other=other, 
-        total_attendance=total_attendance
+        total_attendance=total_attendance,
+        total_events=total_events
         )
 
 @site.route('/addparticipant', methods = ['GET', 'POST'])
