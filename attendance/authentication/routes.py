@@ -110,7 +110,7 @@ def callback():
         if logged_user:
             login_user(logged_user)
         else:
-            user = GoogleUser(user_id=unique_id, name=users_name, email=users_email, profile_pic=picture, password=password)
+            user = GoogleUser(name=users_name, email=users_email, profile_pic=picture)
             db.session.add(user)
             db.session.commit()
             login_user(user)
