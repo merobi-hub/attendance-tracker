@@ -106,7 +106,7 @@ def callback():
         picture = userinfo_response.json()['picture']
         users_name = userinfo_response.json()['given_name']
 
-        logged_user = Googleuser.query.filter(GoogleUser.email == users_email).first()    
+        logged_user = Googleuser.query.filter(Googleuser.email == users_email).first()    
         if logged_user:
             login_user(logged_user)
         else:
