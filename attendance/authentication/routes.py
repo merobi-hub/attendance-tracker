@@ -72,7 +72,7 @@ def google():
             authorization_endpoint,
             redirect_uri = request.base_url + "/callback",
             scope = ["openid", "email", "profile"],
-        )
+            )
         return redirect(request_uri)
     except:
         raise Exception('An error occurred. Please try again.')
@@ -89,13 +89,13 @@ def callback():
         authorization_response=request.url,
         redirect_url=request.base_url,
         code=code
-    )
+        )
     token_response = requests.post(
         token_url,
         headers=headers,
         data=body,
         auth=(Config.GOOGLE_CLIENT_ID, Config.GOOGLE_CLIENT_SECRET),
-    )
+        )
     client.parse_request_body_response(json.dumps(token_response.json()))
     userinfo_endpoint = google_provider_cfg['userinfo_endpoint']
     uri, headers, body = client.add_token(userinfo_endpoint)
@@ -110,7 +110,11 @@ def callback():
         if logged_user:
             login_user(logged_user)
         else:
-            user = Googleuser(name=users_name, email=users_email, profile_pic=picture)
+            user = Googleuser(
+                name=users_name, 
+                email=users_email, 
+                profile_pic=picture
+                )
             db.session.add(user)
             db.session.commit()
             login_user(user)
