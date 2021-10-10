@@ -31,7 +31,7 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f'An account for {self.email} has been created.'
 
-class GoogleUser(db.Model, UserMixin):
+class Googleuser(db.Model, UserMixin):
     id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
