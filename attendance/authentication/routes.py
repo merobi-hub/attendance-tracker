@@ -106,15 +106,18 @@ def callback():
         picture = userinfo_response.json()['picture']
         users_name = userinfo_response.json()['given_name']
 
-        logged_user = Googleuser.query.filter(Googleuser.email == users_email).first()    
-        if logged_user:
-            login_user(logged_user)
+        google_user = Googleuser.query.filter(Googleuser.email == users_email).first()
+        print(google_user)    
+        if google_user:
+            print('Google user found, loggin in')
+            login_user(google_user)
         else:
             user = Googleuser(
                 name=users_name, 
                 email=users_email, 
                 profile_pic=picture
                 )
+            print(user, 'Adding Google user to db')
             db.session.add(user)
             db.session.commit()
             login_user(user)
