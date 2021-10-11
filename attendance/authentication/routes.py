@@ -106,21 +106,28 @@ def callback():
         picture = userinfo_response.json()['picture']
         users_name = userinfo_response.json()['given_name']
 
-        google_user = Googleuser.query.filter(Googleuser.email == users_email).first()
+        # google_user = Googleuser.query.filter(Googleuser.email == users_email).first()
+        google_user = Googleuser(name=users_name, email=users_email, profile_pic=picture)
         print(google_user)    
-        if google_user:
-            print('Google user found, loggin in')
-            login_user(google_user)
-        else:
-            user = Googleuser(
-                name=users_name, 
-                email=users_email, 
-                profile_pic=picture
-                )
-            print(user, 'Adding Google user to db')
-            db.session.add(user)
+
+        if not Googleuser.query.filter(Googleuser.email == users_email).first():
+            db.session.add(google_user)
             db.session.commit()
-            login_user(user)
+            login_user(google_user)
+
+        # if google_user:
+        #     print('Google user found, loggin in')
+        #     login_user(google_user)
+        # else:
+        #     user = Googleuser(
+        #         name=users_name, 
+        #         email=users_email, 
+        #         profile_pic=picture
+        #         )
+        #     print(user, 'Adding Google user to db')
+        #     db.session.add(user)
+        #     db.session.commit()
+        #     login_user(user)
 
         flash('You were successfully logged in.', 'auth-success')
         return redirect(url_for('site.home'))
