@@ -113,7 +113,8 @@ def callback():
         if not Googleuser.query.filter(Googleuser.email == users_email).first():
             db.session.add(google_user)
             db.session.commit()
-            login_user(google_user)
+        
+        login_user(google_user)
 
         # if google_user:
         #     print('Google user found, loggin in')
