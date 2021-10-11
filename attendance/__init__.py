@@ -1,5 +1,6 @@
 # from oauth_var.oauth_var import GOOGLE_CLIENT_ID
 from flask import Flask
+from flask_login.login_manager import LoginManager
 from config import Config 
 from .site.routes import site
 from .authentication.routes import auth
@@ -17,8 +18,11 @@ app.config.from_object(Config)
 app.register_blueprint(site)
 app.register_blueprint(auth)
 
+# Database setup
 root_db.init_app(app)
 migrate = Migrate(app, root_db)
+
+# User session management setup
 login_manager.init_app(app)
 login_manager.login_view = 'auth.login'
 

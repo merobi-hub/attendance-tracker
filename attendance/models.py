@@ -9,7 +9,7 @@ login_manager = LoginManager()
 
 @login_manager.user_loader
 def load_user(id):
-    return User.query.get(id) 
+    return User.query.get(id), Googleuser.query.get(id) 
 
 class User(db.Model, UserMixin):
     id = db.Column(db.String, primary_key=True)
