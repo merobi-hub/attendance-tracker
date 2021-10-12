@@ -118,7 +118,7 @@ def callback():
             db.session.add(google_user)
             db.session.commit()
         
-        if google_user and google_user.is_authenticated():
+        if google_user:
             login_user(google_user)
 
         # if google_user:
