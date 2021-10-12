@@ -55,6 +55,10 @@ def login():
                 flash('Email or password is incorrect. Please try again.', 'auth-failed')
                 return redirect(url_for('auth.login'))
 
+        # else:
+
+        #     logged_user = Googleuser.query.filter(Googleuser.)
+
     except:
         raise Exception('An error occurred. Please try again.')
 
@@ -114,7 +118,8 @@ def callback():
             db.session.add(google_user)
             db.session.commit()
         
-        login_user(google_user)
+        if google_user and google_user.is_authenticated():
+            login_user(google_user)
 
         # if google_user:
         #     print('Google user found, loggin in')
