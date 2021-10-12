@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, flash, redirect
 from flask.helpers import url_for
 from werkzeug.security import check_password_hash
-from flask_login import LoginManager, current_user, login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required
 from attendance.forms import HostLogin
 from attendance.models import User, db, Googleuser
 import requests

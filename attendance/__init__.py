@@ -1,6 +1,5 @@
 # from oauth_var.oauth_var import GOOGLE_CLIENT_ID
 from flask import Flask
-from flask_login.login_manager import LoginManager
 from config import Config 
 from .site.routes import site
 from .authentication.routes import auth
