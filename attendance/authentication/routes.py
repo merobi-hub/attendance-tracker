@@ -135,8 +135,11 @@ def callback():
         #     db.session.commit()
         #     login_user(user)
 
-        flash('You were successfully logged in.', 'auth-success')
-        return redirect(url_for('site.home'))
+            flash('You were successfully logged in.', 'auth-success')
+            return redirect(url_for('site.home'))
+        else:
+            flash('An error occurred. Please try again.', 'auth-failed')
+            return redirect(url_for('auth.login'))
 
     else:
         return 'User email not available for not verified by Google.', 400
