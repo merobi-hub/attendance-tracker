@@ -10,8 +10,10 @@ login_manager = LoginManager()
 @login_manager.user_loader
 def load_user(id):
     try:
+        print('loading User')
         return User.query.get(id)
     except:
+        print('loading Googleuser')
         return Googleuser.query.get(id) 
 
 class User(db.Model, UserMixin):
