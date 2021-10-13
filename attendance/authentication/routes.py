@@ -3,7 +3,7 @@ from flask.helpers import url_for
 from werkzeug.security import check_password_hash
 from flask_login import login_user, logout_user, login_required
 from attendance.forms import HostLogin
-from attendance.models import User, db, Googleuser
+from attendance.models import User, db
 import requests
 from oauthlib.oauth2 import WebApplicationClient
 from config import Config
@@ -119,7 +119,7 @@ def callback():
         #     db.session.commit()
 
         if not google_user:
-            user = Googleuser(name=users_name, email=users_email, profile_pic=picture)
+            user = User(name=users_name, email=users_email, profile_pic=picture)
             db.session.add(user)
             db.session.commit()
             login_user(user)
