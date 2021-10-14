@@ -14,18 +14,20 @@ def load_user(id):
 
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String)
     email = db.Column(db.String, nullable=False, unique=True)
-    password = db.Column(db.String, default='')
     profile_pic = db.Column(db.String)
+    id = db.Column(db.String, primary_key=True)
+    password = db.Column(db.String, default='')
+    
 
     def __init__(self, name, email, profile_pic, id='', password=''):
-        self.id = self.set_id()
         self.name = name 
         self.email = email 
-        self.password = self.set_password(password)
         self.profile_pic = profile_pic
+        self.id = self.set_id()
+        self.password = self.set_password(password)
+        
 
     def set_id(self):
         return str(uuid.uuid4())
