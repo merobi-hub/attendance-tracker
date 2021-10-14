@@ -110,7 +110,7 @@ def callback():
         picture = userinfo_response.json()['picture']
         users_name = userinfo_response.json()['given_name']
 
-        google_user = Googleuser.query.filter(Googleuser.email == users_email).first()
+        google_user = User.query.filter(User.email == users_email).first()
         # google_user = Googleuser(name=users_name, email=users_email, profile_pic=picture)
         print(google_user)    
 
