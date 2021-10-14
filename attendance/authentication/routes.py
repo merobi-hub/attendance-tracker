@@ -24,7 +24,7 @@ def signup():
             email = form.email.data 
             password = form.password.data 
             
-            user = User(email=email, profile_pic='', password=password)
+            user = User(name='', email=email, profile_pic='', password=password)
             db.session.add(user)
             db.session.commit()
 
