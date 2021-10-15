@@ -39,24 +39,6 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f'An account for {self.email} has been created.'
 
-# class Googleuser(db.Model, UserMixin):
-#     id = db.Column(db.String, primary_key=True)
-#     name = db.Column(db.String, nullable=False)
-#     email = db.Column(db.String, nullable=False)
-#     profile_pic = db.Column(db.String, nullable=False)
-
-#     def __init__(self, name, email, profile_pic, id=''):
-#         self.id = self.set_id()
-#         self.name = name 
-#         self.email = email 
-#         self.profile_pic = profile_pic
-
-#     def set_id(self):
-#         return str(uuid.uuid4()) 
-
-#     def __repr__(self):
-#         return f'An account for {self.email} has been created.'
-
 class Event(db.Model, UserMixin):
     id = db.Column(db.String, primary_key=True)
     title = db.Column(db.String(300))

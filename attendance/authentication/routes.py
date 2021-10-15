@@ -55,10 +55,6 @@ def login():
                 flash('Email or password is incorrect. Please try again.', 'auth-failed')
                 return redirect(url_for('auth.login'))
 
-        # else:
-
-        #     logged_user = Googleuser.query.filter(Googleuser.)
-
     except:
         raise Exception('An error occurred. Please try again.')
 
@@ -111,12 +107,6 @@ def callback():
         users_name = userinfo_response.json()['given_name']
 
         google_user = User.query.filter(User.email == users_email).first()
-        # google_user = Googleuser(name=users_name, email=users_email, profile_pic=picture)
-        print(google_user)    
-
-        # if not Googleuser.query.filter(Googleuser.email == users_email).first():
-        #     db.session.add(google_user)
-        #     db.session.commit()
 
         if not google_user:
             user = User(name=users_name, email=users_email, profile_pic=picture)
@@ -130,28 +120,11 @@ def callback():
         else:
             login_user(google_user)
 
-        # if google_user:
-        #     print('Google user found, loggin in')
-        #     login_user(google_user)
-        # else:
-        #     user = Googleuser(
-        #         name=users_name, 
-        #         email=users_email, 
-        #         profile_pic=picture
-        #         )
-        #     print(user, 'Adding Google user to db')
-        #     db.session.add(user)
-        #     db.session.commit()
-        #     login_user(user)
-
             flash('You were successfully logged in.', 'auth-success')
             return redirect(url_for('site.home'))
     else:
         flash('An error occurred. Please try again.', 'auth-failed')
         return redirect(url_for('auth.login'))
-
-    # else:
-    #     return 'User email not available or not verified by Google.', 400
 
 @auth.route('/logout')
 @login_required
