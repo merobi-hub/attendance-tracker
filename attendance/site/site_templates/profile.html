@@ -18,7 +18,9 @@
                         <p>
                             <a href="{{ url_for('site.addParticipant', id=host_event.id) }}" class="card-link">Add Participant</a>
                         </p>
-                        <a href="{{ url_for('site.calculateAll', title=host_event.title, other=host_event.other) }}">Calculate Attendance</a>
+                        <p>
+                            <a href="{{ url_for('site.calculateAll', title=host_event.title, other=host_event.other) }}">Calculate Attendance</a>
+                        </p>
                         <p>
                             <a href="{{ url_for('site.editevent', id=host_event.id, title=host_event.title, host=host_event.host, day=host_event.day, time=host_event.time, duration=host_event.duration, other=host_event.other, passkey=host_event.passkey) }}" class="btn btn-primary" id="edit">Edit</a>
                             <a href="{{ url_for('site.deleteevent', id=host_event.id) }}" class="btn btn-primary" id="delete">Delete</a>
