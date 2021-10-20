@@ -31,8 +31,8 @@ body {
 
 #nav-container {
     width: 100%;
-    color: white;
-    background-color: black;
+    color: black;
+    /* background-color: black; */
 }
 
 #nav-links {
@@ -48,8 +48,8 @@ body {
 .nav-div {
     width: 75%;
     margin: 0 auto;
-    height: 10vh;
-    /* margin-top: 5vh; */
+    /* height: 10vh; */
+    margin-top: 5vh;
 }
 
 #nav-link {
@@ -90,9 +90,9 @@ body {
 }
 
 #small-nav-link-hosts {
-    background-color: white;
+    background-color: gray;
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 
