@@ -7,9 +7,7 @@
             <div class="col-md-6" id="event-col">
                 <h2>{{event.title}}</h2> 
                 <h4>Date: {{event.day}}</h4> 
-                <h4>Notes: {{event.other}}</h4>
-                View:  
-                <a href="{{ url_for('site.calculateAll', title=event.title, other=event.other) }}">comprehensive attendance data for this kind of event.</a> 
+                <h4>Notes: {{event.other}}</h4> 
             </div>
         </div>
         <div id="participant-list">

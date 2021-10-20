@@ -31,6 +31,8 @@ body {
 
 #nav-container {
     width: 100%;
+    color: white;
+    background-color: black;
 }
 
 #nav-links {
@@ -87,9 +89,9 @@ body {
 }
 
 #small-nav-link-hosts {
-    background-color: gray;
+    background-color: white;
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 
