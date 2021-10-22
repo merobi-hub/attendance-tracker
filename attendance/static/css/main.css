@@ -30,9 +30,9 @@ body {
 /* Nav */
 
 #nav-container {
-    width: 100%;
-    color: black;
-    /* background-color: black; */
+    max-width: 100%;
+    background-color: black;
+    height: 10vh;
 }
 
 #nav-links {
@@ -56,18 +56,18 @@ body {
 
 #nav-link {
     text-decoration: none;
-    color:black;
+    color:white;
 }
 
 /* Small Nav */
 
-.small-top-nav {
-    
+.top-nav {
+    padding-top: 2vh;
 }
 
 #small-nav-col {
     text-align: center;
-    padding-top: 2vh;
+    vertical-align: middle;
 }
 
 #small-nav-col-hosts {
@@ -78,7 +78,7 @@ body {
 .small-nav-div {
     width: 50%;
     margin: 0 auto;
-    margin-top: 5vh;
+    /* margin-top: 5vh; */
 }
 
 #small-nav-links {
@@ -87,8 +87,8 @@ body {
 
 #small-nav-link {
     text-decoration: none;
-    color: black;
-    
+    color: white;
+    vertical-align: middle;
 }
 
 #small-nav-link-hosts {
