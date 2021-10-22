@@ -19,7 +19,7 @@
 <title>Attendance Keeper</title>
 </head>
 <body>
-    <div class="container">
+    <!-- <div class="container"> -->
         {% with messages = get_flashed_messages(with_categories = true) %}
             {% if messages %}
                 {% for cat,msg in messages %}
@@ -42,7 +42,7 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-    </div>
+    <!-- </div> -->
     
     <div class="container" id="nav-container">
         {% if current_user.is_authenticated %}

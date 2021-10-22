@@ -63,6 +63,7 @@ body {
 
 .top-nav {
     padding-top: 2vh;
+    /* vertical-align: middle; */
 }
 
 #small-nav-col {
