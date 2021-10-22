@@ -37,7 +37,9 @@ body {
 
 #nav-links {
     /* width: max-content; */
-    margin: auto;
+    /* margin: auto; */
+    width: 100%;
+    background-color: black;
 }
 
 #nav-col {
