@@ -32,7 +32,8 @@ body {
 #nav-container {
     max-width: 100%;
     background-color: black;
-    height: 10vh;
+    height: 14vh;
+    
 }
 
 #nav-links {
@@ -62,13 +63,15 @@ body {
 /* Small Nav */
 
 .top-nav {
-    padding-top: 2vh;
-    /* vertical-align: middle; */
+    
 }
 
 #small-nav-col {
     text-align: center;
-    vertical-align: middle;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 #small-nav-col-hosts {
@@ -78,12 +81,17 @@ body {
 
 .small-nav-div {
     width: 50%;
+    padding-top: 4vh;
     margin: 0 auto;
-    /* margin-top: 5vh; */
+    
 }
 
 #small-nav-links {
     margin: 0 auto;
+    display: flex;
+    justify-content: center; 
+    align-content: center;
+    flex-direction: row;
 }
 
 #small-nav-link {
