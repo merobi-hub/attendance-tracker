@@ -32,7 +32,10 @@ body {
 #nav-container {
     max-width: 100%;
     background-color: black;
-    height: 14vh;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
     
 }
 
@@ -52,7 +55,7 @@ body {
     width: 75%;
     margin: 0 auto;
     /* height: 10vh; */
-    margin-top: 5vh;
+    /* margin-top: 25%; */
 }
 
 #nav-link {
@@ -64,6 +67,7 @@ body {
 
 .top-nav {
     
+
 }
 
 #small-nav-col {
@@ -81,8 +85,9 @@ body {
 
 .small-nav-div {
     width: 50%;
-    padding-top: 4vh;
+    /* padding-top: 4vh; */
     margin: 0 auto;
+    
     
 }
 
@@ -92,7 +97,7 @@ body {
     justify-content: center; 
     align-content: center;
     flex-direction: row;
-}
+} 
 
 #small-nav-link {
     text-decoration: none;
