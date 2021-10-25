@@ -24,13 +24,12 @@ body {
 
 .home-title-text {
     font-size: 550%;
-    /* font-weight: bold; */
 }
 
 /* Alerts */
 
-.alert-container {
-    background-color: black;
+.alert {
+    margin-bottom: 0rem;
 }
 
 /* Nav */
@@ -46,8 +45,6 @@ body {
 }
 
 #nav-links {
-    /* width: max-content; */
-    /* margin: auto; */
     width: 100%;
     background-color: black;
 }
@@ -60,8 +57,6 @@ body {
 .nav-div {
     width: 75%;
     margin: 0 auto;
-    /* height: 10vh; */
-    /* margin-top: 25%; */
 }
 
 #nav-link {
@@ -70,11 +65,6 @@ body {
 }
 
 /* Small Nav */
-
-.top-nav {
-    
-
-}
 
 #small-nav-col {
     text-align: center;
@@ -91,10 +81,7 @@ body {
 
 .small-nav-div {
     width: 50%;
-    /* padding-top: 4vh; */
     margin: 0 auto;
-    
-    
 }
 
 #small-nav-links {
@@ -133,14 +120,6 @@ body {
     width: 50%;
     margin: 0 auto
 }
-
-#create-btn {
-    /* width: 50%;
-    margin-left: 25%; */
-    /* width: 50%; */
-    /* margin: 0 auto;
-    margin-top: 10vh;  */
-} 
 
 /* event.html */
 
@@ -201,7 +180,6 @@ body {
 }
 
 #events-row {
-    /* text-align: center; */
     width: 50%;
     margin: 0 auto
 }
@@ -228,7 +206,6 @@ body {
 
 #profile-col {
     margin: 0 auto;
-    /* text-align: center */
 }
 
 #delete {
@@ -242,8 +219,6 @@ body {
     background: yellow;
     margin-right: 2vw;
 }
-
-
 
 #calculate-link {
     color: green;
