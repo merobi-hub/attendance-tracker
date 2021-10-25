@@ -27,6 +27,12 @@ body {
     /* font-weight: bold; */
 }
 
+/* Alerts */
+
+.alert-container {
+    background-color: black;
+}
+
 /* Nav */
 
 #nav-container {
