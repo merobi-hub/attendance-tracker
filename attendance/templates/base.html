@@ -19,40 +19,11 @@
 <title>Attendance Keeper</title>
 </head>
 <body>
-    <div class="container" id="alert-container">
-        {% with messages = get_flashed_messages(with_categories = true) %}
-            {% if messages %}
-                {% for cat,msg in messages %}
-                    {% if cat == 'user-created' %}
-                        <div class="alert alert-success">
-                            {{ msg }}
-                            <button type="button" class="close" data-dismiss = "alert">&times;</button>
-                        </div>
-                    {% elif cat == 'auth-success' %}
-                        <div class="alert alert-success">
-                            {{ msg }}
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        </div>
-                    {% elif cat == 'auth-failed' %}
-                        <div class="alert alert-warning">
-                            {{ msg }}
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-    </div>
-    
     <div class="container" id="nav-container">
-        
-
         {% if current_user.is_authenticated %}
         <div class="nav-div">
             <nav class="top nav">
                 <div class="row" id="nav-links">
-                    
-                    
                         <div class="col-md-4" id="nav-col">
                             <a href="{{ url_for('site.home') }}" id="nav-link">HOME</a>
                         </div>
@@ -90,6 +61,30 @@
     </div>
     
     <div class="container" id="home-title">
+        <div class="container" id="alert-container">
+            {% with messages = get_flashed_messages(with_categories = true) %}
+                {% if messages %}
+                    {% for cat,msg in messages %}
+                        {% if cat == 'user-created' %}
+                            <div class="alert alert-success">
+                                {{ msg }}
+                                <button type="button" class="close" data-dismiss = "alert">&times;</button>
+                            </div>
+                        {% elif cat == 'auth-success' %}
+                            <div class="alert alert-success">
+                                {{ msg }}
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            </div>
+                        {% elif cat == 'auth-failed' %}
+                            <div class="alert alert-warning">
+                                {{ msg }}
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
         <div class="row" id="home-title-row">
             <div class="col-md-12" id="home-title-col">
                 <h1 class="home-title-text"><em>Attend</em></h1>
