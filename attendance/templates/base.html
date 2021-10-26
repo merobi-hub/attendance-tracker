@@ -19,7 +19,7 @@
 <title>Attendance Keeper</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="alert-container">
         {% with messages = get_flashed_messages(with_categories = true) %}
             {% if messages %}
                 {% for cat,msg in messages %}
