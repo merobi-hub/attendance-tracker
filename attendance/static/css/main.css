@@ -31,6 +31,7 @@ body {
 /* Alerts */
 
 #alert-container {
+    margin-top: 0vh;
     position: relative;
     z-index: 1;
 }
