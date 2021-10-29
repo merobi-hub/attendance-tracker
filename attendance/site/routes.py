@@ -70,9 +70,9 @@ def checkin():
     dt_str = event.day + ' ' + event.time
     # Convert day/time str to datetime object
     dt = datetime.datetime.strptime(dt_str, "%Y-%m-%d %H:%M:%S")
-    # Using dt, determine if event has begun and prevent early check-in
-    start_time = dt
-    if datetime.datetime.now() < start_time:
+    # Using dt, determine if event has begun and prevent check-in before 5 minutes prior
+    checkin_time = dt - datetime.timedelta(minutes=5)
+    if datetime.datetime.now() < checkin_time:
         flash(f'Please wait for the event to begin.', 'auth-failed')
         return redirect(url_for('site.home'))
     else:
