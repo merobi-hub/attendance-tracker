@@ -42,6 +42,10 @@ body {
 
 /* Nav */
 
+.top-nav {
+    width: 100;
+}
+
 #nav-container {
     max-width: 100%;
     background-color: black;
@@ -52,8 +56,9 @@ body {
 }
 
 #nav-links {
-    width: 100%;
+    /* width: 100%; */
     background-color: black;
+    margin: 0 auto;
 }
 
 #nav-col {
