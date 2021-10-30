@@ -10,7 +10,7 @@
     {% for k,v in total_attendance.items() %}
     <div class="row">
         <div class="col-md-4">
-            {{k}}: {{v}} {{ (v * 100) / total_events }}
+            {{k}}: {{v}}, {{ (v * 100) / total_events }}%
         </div>
     </div>
     {% endfor %}
