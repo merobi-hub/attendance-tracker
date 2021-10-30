@@ -77,7 +77,7 @@ body {
     text-align: center;
     display: flex;
     align-content: center;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-direction: column;
 }
 
@@ -89,6 +89,7 @@ body {
 .small-nav-div {
     width: 50%;
     margin: 0 auto;
+    justify-content: space-evenly;
 }
 
 #small-nav-links {
