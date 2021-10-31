@@ -4,13 +4,14 @@
 
 <div class="container" id="event-container">
     <div class="row">
-        <h3>{{title}}</h3>
-        <h4>{{other}}</h4>
+        <p><h3>{{title}}</h3></p>
+        <p><h4>{{other}}</h4></p>
     </div>
     {% for k,v in total_attendance.items() %}
     <div class="row">
         <div class="col-md-4">
-            {{k}}: {{v}}, {{ (v * 100) / total_events }}%
+            <!-- {{k}}: {{v}}, {{ (v * 100) / total_events }}% -->
+            {{k}}: {{v[0]}}, {{v[1]}}%
         </div>
     </div>
     {% endfor %}
