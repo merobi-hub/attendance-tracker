@@ -236,7 +236,7 @@ def calculateAll():
 @login_required
 def pdf():
     html = render_template(
-        'calculateAll.html', 
+        'calculateall.html', 
         title=request.args.get('title', None),
         other=request.args.get('other', None),
         total_attendace=request.args.get('total_attendance', None)
