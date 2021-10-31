@@ -220,8 +220,8 @@ def calculateAll():
         else:
             total_attendance[p.first_name.strip() + ' ' + p.last_name.strip()] = 1
     for k, v in total_attendance.items():
-        v = list(v)
-        v.append( (v[0]*100)/total_events )
+        v = [v, (v[0]*100)/total_events]
+        # v.append( (v[0]*100)/total_events )
 
     print(total_attendance)
     return render_template(
