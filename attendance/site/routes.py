@@ -6,7 +6,6 @@ from attendance.models import db, Event, Participant
 import datetime, timedelta
 from sqlalchemy import desc
 import pdfkit
-import wkhtmltopdf
 
 site = Blueprint('site', __name__, template_folder='site_templates')
 
@@ -232,7 +231,7 @@ def calculateAll():
         other=other,
         total_attendance=total_attendance
         )
-    pdf = pdfkit.from_string(html, False)
+    pdf = pdfkit.from_string(html, 'output.pdf')
     response = make_response(pdf)
     response.headers['Content-Type'] = 'application/pdf'
     response.headers['Content-Disposition'] = 'inline; filename=output.pdf'
