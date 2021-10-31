@@ -5,7 +5,7 @@ from attendance.forms import AddParticipant, CreateEvent, CheckIn
 from attendance.models import db, Event, Participant
 import datetime, timedelta
 from sqlalchemy import desc
-import pdfkit
+# import pdfkit
 
 site = Blueprint('site', __name__, template_folder='site_templates')
 
@@ -225,23 +225,23 @@ def calculateAll():
     for k, v in total_attendance.items():
         total_attendance[k] = [v, (v*100)/total_events]
 
-    html = render_template(
-        'calculateall.html', 
-        title=title,
-        other=other,
-        total_attendance=total_attendance
-        )
-    pdf = pdfkit.from_string(html, 'output.pdf')
-    response = make_response(pdf)
-    response.headers['Content-Type'] = 'application/pdf'
-    response.headers['Content-Disposition'] = 'inline; filename=output.pdf'
+    # html = render_template(
+    #     'calculateall.html', 
+    #     title=title,
+    #     other=other,
+    #     total_attendance=total_attendance
+    #     )
+    # pdf = pdfkit.from_string(html, 'output.pdf')
+    # response = make_response(pdf)
+    # response.headers['Content-Type'] = 'application/pdf'
+    # response.headers['Content-Disposition'] = 'inline; filename=output.pdf'
 
     return render_template(
         'calculateall.html', 
         title=title, 
         other=other, 
         total_attendance=total_attendance
-        ), response
+        )
 
 # @site.route('/pdf')
 # @login_required
