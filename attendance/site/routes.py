@@ -239,7 +239,7 @@ def pdf():
         'calculateall.html', 
         title=request.args.get('title', None),
         other=request.args.get('other', None),
-        total_attendace=request.args.get('total_attendance', None)
+        total_attendance=request.args.get('total_attendance', None)
         )
     pdf = pdfkit.from_string(html, False)
     response = make_response(pdf)
