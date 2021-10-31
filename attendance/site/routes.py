@@ -6,6 +6,7 @@ from attendance.models import db, Event, Participant
 import datetime, timedelta
 from sqlalchemy import desc
 import pdfkit
+import wkhtmltopdf
 
 site = Blueprint('site', __name__, template_folder='site_templates')
 
