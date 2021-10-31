@@ -52,5 +52,6 @@ timedelta==2020.12.3
 typing-extensions==3.10.0.2
 urllib3==1.26.6
 Werkzeug==0.16.0
+wkhtmltopdf==0.2
 WTForms==2.3.3
 zipp==3.5.0
