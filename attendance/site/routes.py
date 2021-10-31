@@ -216,10 +216,11 @@ def calculateAll():
     total_attendance = {}
     for p, e in participants:
         if p.first_name.strip() + ' ' + p.last_name.strip() in total_attendance.keys():
-            total_attendance[p.first_name.strip() + ' ' + p.last_name.strip()] += [1]
+            total_attendance[p.first_name.strip() + ' ' + p.last_name.strip()] += 1
         else:
-            total_attendance[p.first_name.strip() + ' ' + p.last_name.strip()] = [1]
+            total_attendance[p.first_name.strip() + ' ' + p.last_name.strip()] = 1
     for k, v in total_attendance.items():
+        v = list(v)
         v.append( (v[0]*100)/total_events )
 
     print(total_attendance)
