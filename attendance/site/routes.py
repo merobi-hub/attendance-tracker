@@ -1,10 +1,11 @@
-from flask import Blueprint, render_template, request, flash, redirect
+from flask import Blueprint, render_template, request, flash, redirect, make_response
 from flask.helpers import url_for
 from flask_login import login_required, current_user
 from attendance.forms import AddParticipant, CreateEvent, CheckIn
 from attendance.models import db, Event, Participant
 import datetime, timedelta
 from sqlalchemy import desc
+import pdfkit
 
 site = Blueprint('site', __name__, template_folder='site_templates')
 
@@ -199,37 +200,53 @@ def calculate():
 @site.route('/calculateall')
 @login_required
 def calculateAll():
-    """"""
+    """Returns list of event attendees and their attendance percentages"""
     title = request.args.get('title', None)
     other = request.args.get('other', None)
     events = Event.query.filter_by(title=title, other=other).all()
-    total_events = 0 
+    # Count total number of events
+    total_events = 0
     for event in events:
         total_events += 1 
+    # Retrieve attendees from db
     participants = db.session.query(Participant, Event).filter(
         Participant.event_id == Event.id, 
         Event.title == title,
         Event.other == other
         ).order_by(Participant.last_name).all()
+    # Count events attended by participants
     total_attendance = {}
     for p, e in participants:
         if p.first_name.strip() + ' ' + p.last_name.strip() in total_attendance.keys():
             total_attendance[p.first_name.strip() + ' ' + p.last_name.strip()] += 1
         else:
             total_attendance[p.first_name.strip() + ' ' + p.last_name.strip()] = 1
+    # Calculate and add attendance percentage to total_attendance dict
     for k, v in total_attendance.items():
-        # v = [v, (v*100)/total_events]
         total_attendance[k] = [v, (v*100)/total_events]
-        # v.append( (v[0]*100)/total_events )
 
-    print(total_attendance)
     return render_template(
         'calculateall.html', 
         title=title, 
         other=other, 
-        total_attendance=total_attendance,
-        total_events=total_events
+        total_attendance=total_attendance
         )
+
+@site.route('/pdf')
+@login_required
+def pdf():
+    html = render_template(
+        'calculateAll.html', 
+        title=request.args.get('title', None),
+        other=request.args.get('other', None),
+        total_attendace=request.args.get('total_attendance', None)
+        )
+    pdf = pdfkit.from_string(html, False)
+    response = make_response(pdf)
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Content-Disposition'] = 'inline; filename=output.pdf'
+    return response
+    
 
 @site.route('/addparticipant', methods = ['GET', 'POST'])
 @login_required 
