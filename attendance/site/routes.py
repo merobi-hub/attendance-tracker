@@ -211,8 +211,6 @@ def calculateAll():
         Event.title == title,
         Event.other == other
         ).order_by(Participant.last_name).all()
-    for p, e in participants:
-        print(p.last_name + ' ' + p.first_name)
     total_attendance = {}
     for p, e in participants:
         if p.first_name.strip() + ' ' + p.last_name.strip() in total_attendance.keys():
@@ -220,7 +218,8 @@ def calculateAll():
         else:
             total_attendance[p.first_name.strip() + ' ' + p.last_name.strip()] = 1
     for k, v in total_attendance.items():
-        v = [v, (v*100)/total_events]
+        # v = [v, (v*100)/total_events]
+        total_attendance[k] = [v, (v*100)/total_events]
         # v.append( (v[0]*100)/total_events )
 
     print(total_attendance)
