@@ -227,9 +227,9 @@ def calculateAll():
 
     html = render_template(
         'calculateall.html', 
-        title=request.args.get('title', None),
-        other=request.args.get('other', None),
-        total_attendance=request.args.get('total_attendance', None)
+        title=title,
+        other=other,
+        total_attendance=total_attendance
         )
     pdf = pdfkit.from_string(html, False)
     response = make_response(pdf)
