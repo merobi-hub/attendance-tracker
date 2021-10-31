@@ -225,16 +225,6 @@ def calculateAll():
     for k, v in total_attendance.items():
         total_attendance[k] = [v, (v*100)/total_events]
 
-    return render_template(
-        'calculateall.html', 
-        title=title, 
-        other=other, 
-        total_attendance=total_attendance
-        )
-
-@site.route('/pdf')
-@login_required
-def pdf():
     html = render_template(
         'calculateall.html', 
         title=request.args.get('title', None),
@@ -245,7 +235,28 @@ def pdf():
     response = make_response(pdf)
     response.headers['Content-Type'] = 'application/pdf'
     response.headers['Content-Disposition'] = 'inline; filename=output.pdf'
-    return response
+
+    return render_template(
+        'calculateall.html', 
+        title=title, 
+        other=other, 
+        total_attendance=total_attendance
+        ), response
+
+# @site.route('/pdf')
+# @login_required
+# def pdf():
+#     html = render_template(
+#         'calculateall.html', 
+#         title=request.args.get('title', None),
+#         other=request.args.get('other', None),
+#         total_attendance=request.args.get('total_attendance', None)
+#         )
+#     pdf = pdfkit.from_string(html, False)
+#     response = make_response(pdf)
+#     response.headers['Content-Type'] = 'application/pdf'
+#     response.headers['Content-Disposition'] = 'inline; filename=output.pdf'
+#     return response
     
 
 @site.route('/addparticipant', methods = ['GET', 'POST'])

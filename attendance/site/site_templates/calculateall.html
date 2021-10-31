@@ -5,10 +5,10 @@
 <div class="container" id="event-container">
     <div>
         <h3>{{title}}</h3>
-        <br>
         <h4>{{other}}</h4>
-        <a href="{{ url_for('site.pdf', title=title, other=other, total_attendance=total_attendance) }}" >Get PDF</a>
+        <!-- <a href="{{ url_for('site.pdf', title=title, other=other, total_attendance=total_attendance) }}" >Get PDF</a> -->
     </div>
+    <br>
     {% for k,v in total_attendance.items() %}
     <div class="row">
         <div class="col-md-4">
