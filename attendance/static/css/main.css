@@ -55,11 +55,10 @@ body {
     flex-direction: row;    
 }
 
-#nav-links {
-    /* width: 100%; */
+/* #nav-links {
     background-color: black;
     margin: 0 auto;
-}
+} */
 
 #nav-col {
     width: 200px;
@@ -112,7 +111,7 @@ body {
 }
 
 #small-nav-link-hosts {
-    background-color: gray;
+    background-color: black;
     text-decoration: none;
     color: white;
 }
