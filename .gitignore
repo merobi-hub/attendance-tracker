@@ -1,5 +1,4 @@
 attendance_env
 .env 
 __pycache__
-migrations
 oauth_var

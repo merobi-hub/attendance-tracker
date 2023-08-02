@@ -3,7 +3,8 @@ from flask.helpers import url_for
 from flask_login import login_required, current_user
 from attendance.forms import AddParticipant, CreateEvent, CheckIn
 from attendance.models import db, Event, Participant
-import datetime, timedelta
+import datetime
+from datetime import timedelta
 from sqlalchemy import desc
 # import pdfkit
 
