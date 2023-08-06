@@ -96,6 +96,10 @@ body {
     justify-content: space-evenly;
 }
 
+#nav-links {
+    margin: 0 auto;
+}
+
 #small-nav-links {
     margin: 0 auto;
     display: flex;
