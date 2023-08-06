@@ -137,6 +137,10 @@ body {
     margin: 0 auto
 }
 
+#create-btn {
+    background-color: green;
+}
+
 /* event.html */
 
 #event-container {
