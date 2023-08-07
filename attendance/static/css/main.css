@@ -25,7 +25,8 @@ body {
 }
 
 .home-title-text {
-    font-size: 550%;
+    color: gray;
+    /* font-size: 550%; */
 }
 
 /* Alerts */
@@ -48,7 +49,7 @@ body {
 
 #nav-container {
     max-width: 100%;
-    background-color: gray;
+    background-color: rgb(208, 208, 208);
     height: 10vh;
     display: flex;
     align-items: center;
