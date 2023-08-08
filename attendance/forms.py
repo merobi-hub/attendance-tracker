@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, DateTimeField, TextAreaField, PasswordField
+from wtforms import StringField, SubmitField, TextAreaField, PasswordField
 from wtforms.validators import DataRequired, Email
 from flask_login import UserMixin
 
@@ -16,12 +16,14 @@ class CreateEvent(FlaskForm, UserMixin):
 class CheckIn(FlaskForm):
     first_name = TextAreaField('First Name', validators=[DataRequired()])
     last_name = TextAreaField('Last Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
     passkey = TextAreaField('Passkey (if provided)')
     submit_button = SubmitField()
 
 class AddParticipant(FlaskForm):
     first_name = TextAreaField('First Name', validators=[DataRequired()])
     last_name = TextAreaField('Last Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
     submit_button = SubmitField()
 
 class HostLogin(FlaskForm, UserMixin):

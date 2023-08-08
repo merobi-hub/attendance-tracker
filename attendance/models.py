@@ -82,11 +82,13 @@ class Participant(db.Model, UserMixin):
     id = db.Column(db.String, primary_key=True)
     first_name = db.Column(db.String(150))
     last_name = db.Column(db.String(150))
+    email = db.Column(db.String(150))
     event_id = db.Column(db.String, db.ForeignKey('event.id'), nullable=False)
 
-    def __init__(self, first_name, last_name, event_id, id=''): 
+    def __init__(self, first_name, last_name, email, event_id, id=''): 
         self.first_name = first_name 
-        self.last_name = last_name 
+        self.last_name = last_name
+        self.email = email 
         self.event_id = event_id
         self.id = self.set_id() 
 
