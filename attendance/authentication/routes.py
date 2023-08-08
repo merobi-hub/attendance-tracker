@@ -70,7 +70,8 @@ def google():
 
         request_uri = client.prepare_request_uri(
             authorization_endpoint,
-            redirect_uri = request.base_url + "/callback",
+            # redirect_uri = request.base_url + "/callback",
+            redirect_uri = "http://whoshowed.com/google/callback",
             scope = ["openid", "email", "profile"],
             )
         return redirect(request_uri)
@@ -88,6 +89,7 @@ def callback():
         token_endpoint,
         authorization_response=request.url,
         redirect_url=request.base_url,
+        redirect_uri="http://whoshowed.com/google/callback",
         code=code
         )
     token_response = requests.post(
