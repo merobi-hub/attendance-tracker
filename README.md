@@ -29,3 +29,13 @@ A host's profile displays all events ever created by that host and features link
 ## License
 
 Creative Commons BY-SA 4.0
+
+## Db regeneration process notes
+
+Locally:
+`export FLASK_APP='attendance'`
+`flask db init`
+`flask db migrate`
+commit changes and push to main
+on Heroku: copy and paste deploy db url env var to deploy db url. Then open console and run `flask db upgrade`
+

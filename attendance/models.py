@@ -1,5 +1,4 @@
 from flask_sqlalchemy import SQLAlchemy
-# from datetime import date, time 
 import uuid 
 from werkzeug.security import generate_password_hash
 from flask_login import UserMixin, LoginManager 
@@ -15,7 +14,7 @@ def load_user(id):
 
 class User(db.Model, UserMixin):
     name = db.Column(db.String)
-    email = db.Column(db.String, nullable=False, unique=True)
+    email = db.Column(db.String(80), nullable=False, unique=True)
     profile_pic = db.Column(db.String)
     id = db.Column(db.String, primary_key=True)
     password = db.Column(db.String, default='')
@@ -82,7 +81,7 @@ class Participant(db.Model, UserMixin):
     id = db.Column(db.String, primary_key=True)
     first_name = db.Column(db.String(150))
     last_name = db.Column(db.String(150))
-    email = db.Column(db.String(150))
+    email = db.Column(db.String(80), unique=True)
     event_id = db.Column(db.String, db.ForeignKey('event.id'), nullable=False)
 
     def __init__(self, first_name, last_name, email, event_id, id=''): 
