@@ -71,14 +71,14 @@ def google():
         request_uri = client.prepare_request_uri(
             authorization_endpoint,
             # redirect_uri = request.base_url + "/callback",
-            redirect_uri = "https://whoshowed.com/google/callback",
+            redirect_uri = "https://whoshowed.com/oauth2callback",
             scope = ["openid", "email", "profile"],
             )
         return redirect(request_uri)
     except:
         raise Exception('An error occurred. Please try again.')
 
-@auth.route('/google/callback', methods = ['GET', 'POST'])
+@auth.route('/oauth2callback', methods = ['GET', 'POST'])
 def callback():
     code = request.args.get('code')
     def get_google_provider_cfg():
@@ -89,7 +89,7 @@ def callback():
         token_endpoint,
         authorization_response=request.url,
         # redirect_url=request.base_url,
-        redirect_uri="https://whoshowed.com/google/callback",
+        redirect_uri="https://whoshowed.com/oauth2callback",
         code=code
         )
     token_response = requests.post(
