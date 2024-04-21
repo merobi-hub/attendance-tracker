@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, make_response
-from flask_login import login_required
+from flask_login import login_required, current_user
 from flask.helpers import url_for
 from attendance.forms import AddParticipant, CreateEvent, CheckIn
 from attendance.models import db, Event, Participant
