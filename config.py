@@ -12,7 +12,8 @@ class Config():
     GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET', None)
     GOOGLE_DISCOVERY_URL = (
         "https://accounts.google.com/.well-known/openid-configuration"
-    )    
+    )
+    GOOGLE_REDIRECT_URI = os.environ.get('GOOGLE_REDIRECT_URI', None)    
 
     # DATABASE_URL = os.environ.get('DATABASE_URL')
     # conn = psycopg2.connect(DATABASE_URL, sslmode='require')

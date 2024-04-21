@@ -49,11 +49,13 @@ body {
 
 #nav-container {
     max-width: 100%;
-    background-color: rgb(208, 208, 208);
+/*    background-color: rgb(208, 208, 208);*/
     height: 10vh;
     display: flex;
     align-items: center;
-    flex-direction: row;    
+    flex-direction: row;
+    border-bottom: 0.15rem solid;
+    border-bottom-color: gray;    
 }
 
 /* #nav-links {
@@ -73,7 +75,7 @@ body {
 
 #nav-link {
     text-decoration: none;
-    color:white;
+/*    color:white;*/
 }
 
 /* Small Nav */
@@ -111,7 +113,7 @@ body {
 
 #small-nav-link {
     text-decoration: none;
-    color: white;
+    color: black;
     vertical-align: middle;
 }
 
@@ -139,7 +141,21 @@ body {
 }
 
 #create-btn {
-    background-color: green;
+    background-color: #34A853;
+    border-radius: 45% 45%;
+    filter: drop-shadow(5px 5px 4px #3d3d3d);
+}
+
+@media (hover: hover) {
+  #create-btn:hover {
+    background-color: #0a7d00;
+  }
+}
+
+#icon {
+    width: 4em;
+    height: 4em;
+    vertical-align: -0.125em;
 }
 
 /* event.html */

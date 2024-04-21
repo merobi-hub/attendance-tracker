@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, PasswordField
 from wtforms.validators import DataRequired, Email
-from flask_login import UserMixin
+import flask_login
 
-class CreateEvent(FlaskForm, UserMixin):
+class CreateEvent(FlaskForm, flask_login.UserMixin):
     title = TextAreaField('Title', validators=[DataRequired()])
     host = TextAreaField('Host', validators=[DataRequired()])
     day = TextAreaField('Day (yyyy-mm-dd)', validators=[DataRequired()])
@@ -26,9 +26,7 @@ class AddParticipant(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit_button = SubmitField()
 
-class HostLogin(FlaskForm, UserMixin):
+class HostLogin(FlaskForm, flask_login.UserMixin):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit_button = SubmitField()
-
-

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, flash, redirect
+from flask_login import login_required
 from flask.helpers import url_for
 from werkzeug.security import check_password_hash
-from flask_login import login_user, logout_user, login_required
 from attendance.forms import HostLogin
 from attendance.models import User, db
 import requests
@@ -58,7 +58,7 @@ def login():
     except:
         raise Exception('An error occurred. Please try again.')
 
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, client_id=Config.GOOGLE_CLIENT_ID)
 
 @auth.route('/google', methods = ['GET', 'POST'])
 def google():
@@ -71,7 +71,7 @@ def google():
         request_uri = client.prepare_request_uri(
             authorization_endpoint,
             # redirect_uri = request.base_url + "/callback",
-            redirect_uri = "https://whoshowed.com/oauth2callback",
+            redirect_uri = Config.GOOGLE_REDIRECT_URI,
             scope = ["openid", "email", "profile"],
             )
         return redirect(request_uri)
@@ -89,7 +89,7 @@ def callback():
         token_endpoint,
         authorization_response=request.url,
         # redirect_url=request.base_url,
-        redirect_uri="https://whoshowed.com/oauth2callback",
+        redirect_uri=Config.GOOGLE_REDIRECT_URI,
         code=code
         )
     token_response = requests.post(
