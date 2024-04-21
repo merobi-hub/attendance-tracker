@@ -95,6 +95,7 @@ body {
 
 #nav-links {
     margin: 0 auto;
+    text-decoration: none;
 }
 
 #small-nav-links {
@@ -103,6 +104,7 @@ body {
     justify-content: center; 
     align-content: center;
     flex-direction: row;
+    text-decoration: none;
 } 
 
 #small-nav-link {
@@ -112,11 +114,9 @@ body {
 }
 
 #small-nav-link-hosts {
-    /* background-color: black; */
     text-decoration: none;
     color: white;
 }
-
 
 /* Event Button */
 
