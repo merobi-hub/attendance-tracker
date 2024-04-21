@@ -49,7 +49,6 @@ body {
 
 #nav-container {
     max-width: 100%;
-/*    background-color: rgb(208, 208, 208);*/
     height: 10vh;
     display: flex;
     align-items: center;
@@ -57,11 +56,6 @@ body {
     border-bottom: 0.15rem solid;
     border-bottom-color: gray;    
 }
-
-/* #nav-links {
-    background-color: black;
-    margin: 0 auto;
-} */
 
 #nav-col {
     width: 200px;
@@ -75,7 +69,7 @@ body {
 
 #nav-link {
     text-decoration: none;
-/*    color:white;*/
+    color: black;
 }
 
 /* Small Nav */
