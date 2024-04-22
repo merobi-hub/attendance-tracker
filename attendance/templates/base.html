@@ -19,20 +19,20 @@
 <script src="https://kit.fontawesome.com/a0d3252441.js" crossorigin="anonymous"></script>
 <title>Attendance Keeper</title>
 </head>
-<body>
+<body class="bootstrap-overrides">
     <div class="container" id="nav-container">
         {% if current_user.is_authenticated %}
         <div class="nav-div">
             <nav class="top nav">
                 <div class="row" id="nav-links">
                     <div class="col-md-4" id="nav-col">
-                        <a href="{{ url_for('site.home') }}" class="nav-link">HOME</a>
+                        <a href="{{ url_for('site.home') }}" id="nav-link">HOME</a>
                     </div>
                     <div class="col-md-4" id="nav-col">
-                        <a href="{{ url_for('site.profile') }}" class="nav-link">PROFILE</a>
+                        <a href="{{ url_for('site.profile') }}" id="nav-link">PROFILE</a>
                     </div>
                     <div class="col-md-4" id="nav-col">
-                        <a href="{{ url_for('auth.logout') }}" class="nav-link">LOG OUT</a>
+                        <a href="{{ url_for('auth.logout') }}" id="nav-link">LOG OUT</a>
                     </div>
                 </div>
             </nav>
@@ -43,7 +43,7 @@
             <nav class="top-nav">
                 <div class="row" id="small-nav-links">
                     <div class="col-md-4" id="small-nav-col">
-                        <a href="{{ url_for('site.home') }}" class="small-nav-link">HOME</a>
+                        <a href="{{ url_for('site.home') }}" id="small-nav-link">HOME</a>
                     </div>
                     <div class="col-md-4" id="small-nav-col-hosts">
                         <a href="{{ url_for('auth.login') }}" class="btn btn-primary" id="small-nav-link-hosts">HOSTS</a>
