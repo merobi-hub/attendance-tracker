@@ -60,7 +60,7 @@ body {
     text-align: center
 }
 
-#nav-col a {
+#nav-col a a:link a:visited {
     color: black !important;
 }
 
