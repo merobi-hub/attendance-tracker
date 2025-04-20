@@ -38,4 +38,3 @@ Locally:
 `flask db migrate`
 commit changes and push to main
 on Heroku: copy and paste deploy db url env var to deploy db url. Then open console and run `flask db upgrade`
-
