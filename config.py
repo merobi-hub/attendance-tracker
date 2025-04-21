@@ -5,7 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config():
 
-    SECRET_KEY = os.environ['SECRET KEY'] or 'You will never guess...'
+    # SECRET_KEY = os.environ['SECRET KEY'] or 'You will never guess...'
     SQLALCHEMY_DATABASE_URI = os.environ['DEPLOY_DATABASE_URL'] or 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     GOOGLE_CLIENT_ID = os.environ['GOOGLE_CLIENT_ID']
