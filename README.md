@@ -36,5 +36,6 @@ Locally:
 `export FLASK_APP='attendance'`
 `flask db init`
 `flask db migrate`
+verify that migrations dir has been created with new db version in versions dir
 commit changes and push to main
-on Heroku: copy and paste deploy db url env var to deploy db url. Then open console and run `flask db upgrade`
+on Heroku: verify `DEPLOY_DATABASE_URL` is identical to URI of provisioned postgres db. Then open console and run `flask db upgrade`
